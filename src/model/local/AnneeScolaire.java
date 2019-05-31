@@ -1,8 +1,6 @@
 
 package model.local;
 
-import java.util.List;
-
 /**
  * 
  * @author Jerome
@@ -13,8 +11,13 @@ public class AnneeScolaire {
    */
   private int id;
 
-  private List<Classe> classes;
+  public AnneeScolaire(int id) {
+    this.id = id;
+  }
 
-  private List<Trimestre> trimestres;
+  @Override
+  public String toString() {
+    return "AnneeScolaire{" + "id=" + id + '}';
+  }
 
 }

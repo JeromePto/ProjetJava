@@ -1,13 +1,11 @@
-
 package model.local;
 
-import java.util.List;
-
 /**
- * 
+ *
  * @author Jerome
  */
 public class Bulletin {
+
   /**
    * Bulletin ID
    */
@@ -22,25 +20,25 @@ public class Bulletin {
 
   private Inscription insription;
 
-  private List<DetailBulletin> detailBulletins;
-
-  public Bulletin() {
-  }
-
-  public Bulletin(int id, String appreciation, Trimestre trimestre, Inscription insription, List<DetailBulletin> detailBulletins) {
+  public Bulletin(int id, String appreciation, Trimestre trimestre, Inscription insription) {
     this.id = id;
     this.appreciation = appreciation;
     this.trimestre = trimestre;
     this.insription = insription;
-    this.detailBulletins = detailBulletins;
   }
-  
+
+  @Override
+  public String toString() {
+    return "Bulletin{" + "id=" + id + ", appreciation=" + appreciation + ", trimestre=" + trimestre + ", insription=" + insription + '}';
+  }
+
   /**
    * calculate the average
+   *
    * @return Average for the bulletin
    */
   public float getAverage() {
-    return 0;
+    return 0; //TODO calc
   }
 
 }

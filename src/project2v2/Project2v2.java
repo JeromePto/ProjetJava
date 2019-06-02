@@ -39,6 +39,10 @@ public class Project2v2 {
       ex.printStackTrace();
     }
     System.out.println(b);
+    
+    //a.delete(a.find(113));
+    //a.create(new Evaluation(-1, 6f, "prout", (DetailBulletin) DAOFactory.getDetailBulletinDAO().find(6)));
+    //a.update(new Evaluation(114, 19.5f, "prout", (DetailBulletin) DAOFactory.getDetailBulletinDAO().find(6)));
   }
   
 }

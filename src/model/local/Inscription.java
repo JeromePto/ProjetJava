@@ -24,6 +24,18 @@ public class Inscription {
     this.eleve = eleve;
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public Classe getClasse() {
+    return classe;
+  }
+
+  public Eleve getEleve() {
+    return eleve;
+  }
+
   @Override
   public String toString() {
     return "Inscription{" + "id=" + id + ", classe=" + classe + ", eleve=" + eleve + '}';

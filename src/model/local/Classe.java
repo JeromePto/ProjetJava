@@ -32,6 +32,20 @@ public class Classe {
   public String toString() {
     return "Classe{" + "id=" + id + ", nom=" + nom + ", anneeScolaire=" + anneeScolaire + ", niveau=" + niveau + '}';
   }
-  
-  
+
+  public int getId() {
+    return id;
+  }
+
+  public String getNom() {
+    return nom;
+  }
+
+  public AnneeScolaire getAnneeScolaire() {
+    return anneeScolaire;
+  }
+
+  public Niveau getNiveau() {
+    return niveau;
+  } 
 }

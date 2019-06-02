@@ -37,6 +37,19 @@ public class Evaluation {
     return note;
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public String getAppreciation() {
+    return appreciation;
+  }
+
+  public DetailBulletin getDetailBulletin() {
+    return detailBulletin;
+  }
+  
+
   @Override
   public String toString() {
     return "Evaluation{" + "id=" + id + ", note=" + note + ", appreciation=" + appreciation + ", detailBulletin=" + detailBulletin + '}';

@@ -20,4 +20,8 @@ public class AnneeScolaire {
     return "AnneeScolaire{" + "id=" + id + '}';
   }
 
+  public int getId() {
+    return id;
+  }
+
 }

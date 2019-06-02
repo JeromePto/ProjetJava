@@ -28,7 +28,7 @@ public abstract class Personne {
   }
 
   /**
-   * is it an Eleve
+   * is it an Eleve ?
    *
    * @return true if is an eleve
    */
@@ -37,6 +37,18 @@ public abstract class Personne {
   @Override
   public String toString() {
     return "Personne{" + "id=" + id + ", nom=" + nom + ", Prenom=" + Prenom + '}';
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public String getNom() {
+    return nom;
+  }
+
+  public String getPrenom() {
+    return Prenom;
   }
     
 }

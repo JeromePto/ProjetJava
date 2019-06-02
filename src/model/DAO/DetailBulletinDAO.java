@@ -6,16 +6,15 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.local.Bulletin;
 import model.local.DetailBulletin;
 import model.local.Enseignement;
-import model.local.Evaluation;
 
 /**
  *
@@ -29,17 +28,49 @@ public class DetailBulletinDAO extends DAO<DetailBulletin> {
 
   @Override
   public boolean create(DetailBulletin obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "INSERT INTO detailbulletin (APPRECIATION, BULLETIN_ID, ENSEIGEMENT_ID) VALUES(?,?,?)");
+      statement.setObject(1, obj.getAppreciation(), Types.VARCHAR);
+      statement.setObject(2, obj.getBulletin().getId(), Types.INTEGER);
+      statement.setObject(3, obj.getEnseignement().getId(), Types.INTEGER);
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean delete(DetailBulletin obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      this.connect.createStatement().executeUpdate(
+          "DELETE FROM detailbulletin WHERE ID = " + obj.getId());
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean update(DetailBulletin obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "UPDATE detailbulletin "
+              + "SET APPRECIATION = ?, BULLETIN_ID = ?, ENSEIGNEMENT_ID = ? "
+              + "WHERE ID = ?");
+      statement.setString(1, obj.getAppreciation());
+      statement.setInt(2, obj.getBulletin().getId());
+      statement.setInt(3, obj.getEnseignement().getId());
+      statement.setInt(4, obj.getId());
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override

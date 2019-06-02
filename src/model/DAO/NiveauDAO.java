@@ -6,8 +6,10 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,17 +29,45 @@ public class NiveauDAO extends DAO<Niveau> {
 
   @Override
   public boolean create(Niveau obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "INSERT INTO niveau (NOM) VALUES(?)");
+      statement.setObject(1, obj.getNom(), Types.VARCHAR);
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean delete(Niveau obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      this.connect.createStatement().executeUpdate(
+          "DELETE FROM niveau WHERE ID = " + obj.getId());
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean update(Niveau obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "UPDATE niveau "
+              + "SET NOM = ? "
+              + "WHERE ID = ?");
+      statement.setString(1, obj.getNom());
+      statement.setInt(2, obj.getId());
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override

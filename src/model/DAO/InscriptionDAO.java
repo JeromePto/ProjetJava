@@ -6,8 +6,10 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.local.Classe;
@@ -26,17 +28,47 @@ public class InscriptionDAO extends DAO<Inscription> {
 
   @Override
   public boolean create(Inscription obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "INSERT INTO inscription (CLASSE_ID, PERSONNE_ID) VALUES(?,?)");
+      statement.setObject(1, obj.getClasse().getId(), Types.INTEGER);
+      statement.setObject(2, obj.getEleve().getId(), Types.INTEGER);
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean delete(Inscription obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      this.connect.createStatement().executeUpdate(
+          "DELETE FROM inscription WHERE ID = " + obj.getId());
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean update(Inscription obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "UPDATE inscription "
+              + "SET CLASSE_ID = ?, PERSONNE_ID = ? "
+              + "WHERE ID = ?");
+      statement.setInt(1, obj.getClasse().getId());
+      statement.setInt(2, obj.getEleve().getId());
+      statement.setInt(3, obj.getId());
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override

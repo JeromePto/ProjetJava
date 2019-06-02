@@ -41,4 +41,20 @@ public class Bulletin {
     return 0; //TODO calc
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public String getAppreciation() {
+    return appreciation;
+  }
+
+  public Trimestre getTrimestre() {
+    return trimestre;
+  }
+
+  public Inscription getInscription() {
+    return inscription;
+  }
+
 }

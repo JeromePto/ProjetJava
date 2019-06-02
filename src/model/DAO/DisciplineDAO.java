@@ -6,8 +6,10 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.local.Discipline;
@@ -24,17 +26,45 @@ public class DisciplineDAO extends DAO<Discipline> {
 
   @Override
   public boolean create(Discipline obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "INSERT INTO discipline (NOM) VALUES(?)");
+      statement.setObject(1, obj.getNom(), Types.VARCHAR);
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean delete(Discipline obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      this.connect.createStatement().executeUpdate(
+          "DELETE FROM discipline WHERE ID = " + obj.getId());
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean update(Discipline obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "UPDATE discipline "
+              + "SET NOM = ? "
+              + "WHERE ID = ?");
+      statement.setString(1, obj.getNom());
+      statement.setInt(2, obj.getId());
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override

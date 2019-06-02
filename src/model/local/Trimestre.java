@@ -26,6 +26,26 @@ public class Trimestre {
    */
   private Calendar debut;
 
+  public int getId() {
+    return id;
+  }
+
+  public AnneeScolaire getAnneeScolaire() {
+    return anneeScolaire;
+  }
+
+  public int getNumero() {
+    return numero;
+  }
+
+  public Calendar getDebut() {
+    return debut;
+  }
+
+  public Calendar getFin() {
+    return fin;
+  }
+
   /**
    * Ending trimestre date
    */

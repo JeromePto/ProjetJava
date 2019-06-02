@@ -21,6 +21,14 @@ public class Discipline {
     this.nom = nom;
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public String getNom() {
+    return nom;
+  }
+
   @Override
   public String toString() {
     return "Discipline{" + "id=" + id + ", nom=" + nom + '}';

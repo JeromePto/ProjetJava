@@ -32,6 +32,23 @@ public class DetailBulletin {
     this.bulletin = bulletin;
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public String getAppreciation() {
+    return appreciation;
+  }
+
+  public Enseignement getEnseignement() {
+    return enseignement;
+  }
+
+  public Bulletin getBulletin() {
+    return bulletin;
+  }
+
+  
   @Override
   public String toString() {
     return "DetailBulletin{" + "id=" + id + ", appreciation=" + appreciation + ", enseignement=" + enseignement + ", bulletin=" + bulletin + '}';

@@ -6,8 +6,10 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.local.AnneeScolaire;
@@ -24,17 +26,32 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire> {
 
   @Override
   public boolean create(AnneeScolaire obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "INSERT INTO anneescolaire (NOTE) VALUES(NULL)");
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean delete(AnneeScolaire obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      this.connect.createStatement().executeUpdate(
+          "DELETE FROM anneescolaire WHERE ID = " + obj.getId());
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean update(AnneeScolaire obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    throw new UnsupportedOperationException("Not supported yet.");
   }
 
   @Override

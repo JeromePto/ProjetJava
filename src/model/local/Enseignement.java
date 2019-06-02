@@ -20,6 +20,22 @@ public class Enseignement {
   public Enseignement() {
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public Classe getClasse() {
+    return classe;
+  }
+
+  public Discipline getDiscipline() {
+    return discipline;
+  }
+
+  public Professeur getProfesseur() {
+    return professeur;
+  }
+
   public Enseignement(int id, Classe classe, Discipline discipline, Professeur professeur) {
     this.id = id;
     this.classe = classe;

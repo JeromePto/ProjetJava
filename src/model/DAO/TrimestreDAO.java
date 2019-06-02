@@ -6,8 +6,10 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.local.AnneeScolaire;
@@ -25,17 +27,51 @@ public class TrimestreDAO extends DAO<Trimestre> {
 
   @Override
   public boolean create(Trimestre obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "INSERT INTO trimestre (NUMERO, DEBUT, FIN, ANNEESCOLAIRE_ID) VALUES(?,?,?,?)");
+      statement.setObject(1, obj.getNumero(), Types.INTEGER);
+      statement.setObject(2, new java.sql.Date(obj.getDebut().getTime().getTime()), Types.DATE);
+      statement.setObject(3, new java.sql.Date(obj.getFin().getTime().getTime()), Types.DATE);
+      statement.setObject(4, obj.getAnneeScolaire().getId(), Types.INTEGER);
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean delete(Trimestre obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      this.connect.createStatement().executeUpdate(
+          "DELETE FROM trimestre WHERE ID = " + obj.getId());
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean update(Trimestre obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "UPDATE trimestre "
+              + "SET NUMERO = ?, DEBUT = ?, FIN = ?, ANNEESCOLAIRE_ID = ? "
+              + "WHERE ID = ?");
+      statement.setInt(1, obj.getNumero());
+      statement.setDate(2, new java.sql.Date(obj.getDebut().getTime().getTime()));
+      statement.setDate(3, new java.sql.Date(obj.getFin().getTime().getTime()));
+      statement.setInt(4, obj.getAnneeScolaire().getId());
+      statement.setInt(5, obj.getId());
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override

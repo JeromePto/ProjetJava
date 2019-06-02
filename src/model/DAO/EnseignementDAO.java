@@ -6,8 +6,10 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.local.Classe;
@@ -27,17 +29,49 @@ public class EnseignementDAO extends DAO<Enseignement> {
 
   @Override
   public boolean create(Enseignement obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "INSERT INTO enseignement (CLASSE_ID, DISCIPLINE_ID, PERSONNE_ID) VALUES(?,?,?)");
+      statement.setObject(1, obj.getClasse().getId(), Types.INTEGER);
+      statement.setObject(2, obj.getDiscipline().getId(), Types.INTEGER);
+      statement.setObject(3, obj.getProfesseur().getId(), Types.INTEGER);
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean delete(Enseignement obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      this.connect.createStatement().executeUpdate(
+          "DELETE FROM enseignement WHERE ID = " + obj.getId());
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean update(Enseignement obj) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+      PreparedStatement statement = this.connect.prepareStatement(
+          "UPDATE enseignement "
+              + "SET CLASSE_ID = ?, DISCIPLINE_ID = ?, PERSONNE_ID = ? "
+              + "WHERE ID = ?");
+      statement.setInt(1, obj.getClasse().getId());
+      statement.setInt(2, obj.getDiscipline().getId());
+      statement.setInt(3, obj.getProfesseur().getId());
+      statement.setInt(4, obj.getId());
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+      return false;
+    }
+    return true;
   }
 
   @Override

@@ -21,6 +21,14 @@ public class Niveau {
     this.nom = nom;
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public String getNom() {
+    return nom;
+  }
+
   @Override
   public String toString() {
     return "Niveau{" + "id=" + id + ", nom=" + nom + '}';

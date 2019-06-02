@@ -1,8 +1,6 @@
 
 package model.local;
 
-import java.util.List;
-
 /**
  * 
  * @author Jerome
@@ -18,15 +16,14 @@ public class Discipline {
    */
   private String nom;
 
-  private List<Enseignement> enseignements;
-
-  public Discipline() {
-  }
-
-  public Discipline(int id, String nom, List<Enseignement> enseignements) {
+  public Discipline(int id, String nom) {
     this.id = id;
     this.nom = nom;
-    this.enseignements = enseignements;
+  }
+
+  @Override
+  public String toString() {
+    return "Discipline{" + "id=" + id + ", nom=" + nom + '}';
   }
 
   

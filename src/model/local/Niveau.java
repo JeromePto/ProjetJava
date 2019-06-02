@@ -1,8 +1,6 @@
 
 package model.local;
 
-import java.util.List;
-
 /**
  * 
  * @author Jerome
@@ -15,21 +13,17 @@ public class Niveau {
   
   private String nom;
 
-  private List<Classe> classes;
-
   public Niveau() {
   }
 
-  public Niveau(int id, String nom, List<Classe> classes) {
+  public Niveau(int id, String nom) {
     this.id = id;
     this.nom = nom;
-    this.classes = classes;
   }
 
   @Override
   public String toString() {
-    return "Niveau{" + "id=" + id + ", nom=" + nom + ", classes=" + classes + '}';
+    return "Niveau{" + "id=" + id + ", nom=" + nom + '}';
   }
-  
   
 }

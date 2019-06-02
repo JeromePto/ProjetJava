@@ -18,18 +18,18 @@ public class Bulletin {
 
   private Trimestre trimestre;
 
-  private Inscription insription;
+  private Inscription inscription;
 
-  public Bulletin(int id, String appreciation, Trimestre trimestre, Inscription insription) {
+  public Bulletin(int id, String appreciation, Trimestre trimestre, Inscription inscription) {
     this.id = id;
     this.appreciation = appreciation;
     this.trimestre = trimestre;
-    this.insription = insription;
+    this.inscription = inscription;
   }
 
   @Override
   public String toString() {
-    return "Bulletin{" + "id=" + id + ", appreciation=" + appreciation + ", trimestre=" + trimestre + ", insription=" + insription + '}';
+    return "Bulletin{" + "id=" + id + ", appreciation=" + appreciation + ", trimestre=" + trimestre + ", insription=" + inscription + '}';
   }
 
   /**

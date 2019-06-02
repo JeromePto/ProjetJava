@@ -1,8 +1,6 @@
 
 package model.local;
 
-import java.util.List;
-
 /**
  * 
  * @author Jerome
@@ -19,17 +17,19 @@ public class Enseignement {
 
   private Professeur professeur;
 
-  private List<DetailBulletin> detailBulletins;
-
   public Enseignement() {
   }
 
-  public Enseignement(int id, Classe classe, Discipline discipline, Professeur professeur, List<DetailBulletin> detailBulletins) {
+  public Enseignement(int id, Classe classe, Discipline discipline, Professeur professeur) {
     this.id = id;
     this.classe = classe;
     this.discipline = discipline;
     this.professeur = professeur;
-    this.detailBulletins = detailBulletins;
+  }
+
+  @Override
+  public String toString() {
+    return "Enseignement{" + "id=" + id + ", classe=" + classe + ", discipline=" + discipline + ", professeur=" + professeur + '}';
   }
   
 }

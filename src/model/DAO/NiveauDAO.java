@@ -49,13 +49,7 @@ public class NiveauDAO extends DAO<Niveau> {
           ResultSet.CONCUR_READ_ONLY).executeQuery(
               "SELECT * FROM niveau WHERE ID = " + id);
       if (result.first()) {
-        List<Classe> classes = new ArrayList<>();
-        List<Integer> ids = new ArrayList<>();
-        for(Integer it : ids) {
-          DAO<Classe> tmp = DAOFactory.getClasseDAO();
-          classes.add(tmp.find(it));
-        }
-        niv = new Niveau(result.getInt("ID"), result.getString("NAME"), classes);
+        niv = new Niveau(result.getInt("ID"), result.getString("NOM"));
       } else {
         throw new IllegalArgumentException("Missing element in Database");
       }

@@ -6,6 +6,10 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.local.Discipline;
 
 /**
@@ -35,7 +39,21 @@ public class DisciplineDAO extends DAO<Discipline> {
 
   @Override
   public Discipline find(int id) throws IllegalArgumentException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Discipline dis = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE, 
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM discipline WHERE ID = " + id);
+      if (result.first()) {
+        dis = new Discipline(result.getInt("ID"), result.getString("NOM"));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return dis;
   }
   
 }

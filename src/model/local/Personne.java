@@ -21,20 +21,22 @@ public abstract class Personne {
    */
   protected String Prenom;
 
-  public Personne() {
-  }
-
   public Personne(int id, String nom, String Prenom) {
     this.id = id;
     this.nom = nom;
     this.Prenom = Prenom;
   }
 
-  public abstract boolean isEleve();
   /**
    * is it an Eleve
    *
    * @return true if is an eleve
    */
+  public abstract boolean isEleve();
 
+  @Override
+  public String toString() {
+    return "Personne{" + "id=" + id + ", nom=" + nom + ", Prenom=" + Prenom + '}';
+  }
+    
 }

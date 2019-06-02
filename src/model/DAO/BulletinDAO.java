@@ -6,7 +6,13 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.local.Bulletin;
+import model.local.Inscription;
+import model.local.Trimestre;
 
 /**
  *
@@ -35,7 +41,25 @@ public class BulletinDAO extends DAO<Bulletin> {
 
   @Override
   public Bulletin find(int id) throws IllegalArgumentException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Bulletin bul = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE, 
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM bulletin WHERE ID = " + id);
+      if (result.first()) {
+        DAO<Trimestre> trimestre = DAOFactory.getTrimestreDAO();
+        DAO<Inscription> inscription = DAOFactory.getInscriptionDAO();
+        bul = new Bulletin(result.getInt("ID"), result.getString("APPRECIATION"), 
+            trimestre.find(result.getInt("TRIMESTRE_ID")), 
+            inscription.find(result.getInt("INSCRIPTION_ID")));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return bul;
   }
   
 }

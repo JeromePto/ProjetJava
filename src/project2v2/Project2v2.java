@@ -7,7 +7,7 @@ package project2v2;
 
 import model.DAO.DAO;
 import model.DAO.DAOFactory;
-import model.local.Evaluation;
+import model.local.*;
 
 /**
  *
@@ -26,12 +26,17 @@ public class Project2v2 {
   public Project2v2() {
     DAO<Evaluation> a = DAOFactory.getEvaluationDAO();
     Evaluation b = null;
+//    DAO<Classe> a = DAOFactory.getClasseDAO();
+//    Classe b = null;
     try {
       b = a.find(3);
     } catch (IllegalArgumentException ex) {
       System.out.println("err1");
+      System.out.println(ex.getMessage());
     } catch (UnsupportedOperationException ex) {
       System.out.println("err2");
+      System.out.println(ex.getMessage());
+      ex.printStackTrace();
     }
     System.out.println(b);
   }

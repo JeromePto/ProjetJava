@@ -6,6 +6,11 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.AnneeScolaire;
 import model.local.Trimestre;
 
 /**
@@ -35,7 +40,26 @@ public class TrimestreDAO extends DAO<Trimestre> {
 
   @Override
   public Trimestre find(int id) throws IllegalArgumentException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Trimestre tri = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE, 
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM trimestre WHERE ID = " + id);
+      if (result.first()) {
+        DAO<AnneeScolaire> anneeScolaire = DAOFactory.getAnneeScolaireDAO();
+        tri = new Trimestre(result.getInt("ID"), 
+            anneeScolaire.find(result.getInt("ANNEESCOLAIRE_ID")), 
+            result.getInt("NUMERO"), 
+            result.getDate("DEBUT"), 
+            result.getDate("FIN"));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return tri;
   }
   
 }

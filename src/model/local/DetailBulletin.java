@@ -1,8 +1,6 @@
 
 package model.local;
 
-import java.util.List;
-
 /**
  * 
  * @author Jerome
@@ -22,24 +20,21 @@ public class DetailBulletin {
 
   private Bulletin bulletin;
 
-  private List<Evaluation> evaluation;
-
   public float getAverage() {
-    for(Evaluation it : evaluation) {
-      
-    }
+    //TODO calc average
     return 0;
   }
 
-  public DetailBulletin() {
-  }
-
-  public DetailBulletin(int id, String appreciation, Enseignement enseignement, Bulletin bulletin, List<Evaluation> evaluation) {
+  public DetailBulletin(int id, String appreciation, Enseignement enseignement, Bulletin bulletin) {
     this.id = id;
     this.appreciation = appreciation;
     this.enseignement = enseignement;
     this.bulletin = bulletin;
-    this.evaluation = evaluation;
+  }
+
+  @Override
+  public String toString() {
+    return "DetailBulletin{" + "id=" + id + ", appreciation=" + appreciation + ", enseignement=" + enseignement + ", bulletin=" + bulletin + '}';
   }
 
   

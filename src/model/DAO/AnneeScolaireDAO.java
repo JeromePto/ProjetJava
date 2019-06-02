@@ -6,6 +6,10 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.local.AnneeScolaire;
 
 /**
@@ -35,7 +39,21 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire> {
 
   @Override
   public AnneeScolaire find(int id) throws IllegalArgumentException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    AnneeScolaire annee = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE, 
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM anneescolaire WHERE ID = " + id);
+      if (result.first()) {
+        annee = new AnneeScolaire(result.getInt("ID"));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return annee;
   }
   
 }

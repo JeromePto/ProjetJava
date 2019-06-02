@@ -1,8 +1,6 @@
 
 package model.local;
 
-import java.sql.ResultSet;
-
 /**
  * 
  * @author Jerome

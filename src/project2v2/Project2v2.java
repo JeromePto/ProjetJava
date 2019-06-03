@@ -47,7 +47,7 @@ public class Project2v2 {
     }
     System.out.println(b);
     
-    //System.out.println(a.findAll());
+    //System.out.println(a.findAll()); renvoie une map 
 //    System.out.println(b.getDetailBulletin().getStringAverage());
 //    System.out.println(b.getDetailBulletin().getBulletin().getStringAverage());
     //a.delete(a.find(113));
@@ -58,6 +58,7 @@ public class Project2v2 {
     System.out.println(b.getDetailBulletin().getBulletin().getInscription().getClasse().readId(true));
     System.out.println(b.getDetailBulletin().readId(true));
     System.out.println(b.readId(true));
+    //salut
   }
   
 }

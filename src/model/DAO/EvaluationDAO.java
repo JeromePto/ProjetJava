@@ -21,8 +21,8 @@ import model.local.Evaluation;
  */
 public class EvaluationDAO extends DAO<Evaluation> {
 
-  public EvaluationDAO(Connection connect) {
-    super(connect);
+  public EvaluationDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

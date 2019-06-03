@@ -35,6 +35,11 @@ public class Inscription {
   public Eleve getEleve() {
     return eleve;
   }
+  
+  public String readId(boolean printId) {
+    String tmp = eleve.readId(false) + " " + classe.readId(false);
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
 
   @Override
   public String toString() {

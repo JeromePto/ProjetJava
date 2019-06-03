@@ -12,8 +12,8 @@ public class Professeur extends Personne {
     return false;
   }
 
-  public Professeur(int id, String nom, String Prenom) {
-    super(id, nom, Prenom);
+  public Professeur(int id, String nom, String prenom) {
+    super(id, nom, prenom);
   }
 
   

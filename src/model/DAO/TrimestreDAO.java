@@ -21,8 +21,8 @@ import model.local.Trimestre;
  */
 public class TrimestreDAO extends DAO<Trimestre> {
 
-  public TrimestreDAO(Connection connect) {
-    super(connect);
+  public TrimestreDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

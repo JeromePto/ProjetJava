@@ -6,6 +6,14 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @param <T>
@@ -17,13 +25,16 @@ public abstract class DAO<T> {
    * Connection state
    */
   protected Connection connect = null;
+  
+  protected String table;
 
   /**
    * Constructor
    * @param connect Connection parmeter
    */
-  public DAO(Connection connect) {
+  public DAO(Connection connect, String table) {
     this.connect = connect;
+    this.table = table;
   }
   
   /**
@@ -52,5 +63,21 @@ public abstract class DAO<T> {
    * @param id id of object in DB
    * @return the object
    */
-  public abstract T find(int id) throws IllegalArgumentException;  
+  public abstract T find(int id) throws IllegalArgumentException;
+  
+  public Map<Integer, T> findAll() {
+    Map<Integer, T> out = new HashMap<>();    
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM " + table + " WHERE 1");
+      while(result.next()) {
+        out.put(result.getInt("ID"), this.find(result.getInt("ID")));
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return out;
+  }
 }

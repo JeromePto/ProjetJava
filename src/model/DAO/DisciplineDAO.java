@@ -20,8 +20,8 @@ import model.local.Discipline;
  */
 public class DisciplineDAO extends DAO<Discipline> {
 
-  public DisciplineDAO(Connection connect) {
-    super(connect);
+  public DisciplineDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

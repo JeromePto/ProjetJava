@@ -23,8 +23,8 @@ import model.local.Professeur;
  */
 public class EnseignementDAO extends DAO<Enseignement> {
 
-  public EnseignementDAO(Connection connect) {
-    super(connect);
+  public EnseignementDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

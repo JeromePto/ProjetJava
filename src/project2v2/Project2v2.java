@@ -5,6 +5,13 @@
  */
 package project2v2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 import model.DAO.DAO;
 import model.DAO.DAOFactory;
 import model.local.*;
@@ -39,11 +46,18 @@ public class Project2v2 {
       ex.printStackTrace();
     }
     System.out.println(b);
+    
+    //System.out.println(a.findAll());
 //    System.out.println(b.getDetailBulletin().getStringAverage());
 //    System.out.println(b.getDetailBulletin().getBulletin().getStringAverage());
     //a.delete(a.find(113));
     //a.create(new Evaluation(-1, 6f, "prout", (DetailBulletin) DAOFactory.getDetailBulletinDAO().find(6)));
     //a.update(new Evaluation(114, 19.5f, "prout", (DetailBulletin) DAOFactory.getDetailBulletinDAO().find(6)));
+    System.out.println(b.getDetailBulletin().getBulletin().getInscription().getClasse().getAnneeScolaire().readId(true));
+    System.out.println(b.getDetailBulletin().getBulletin().readId(true));
+    System.out.println(b.getDetailBulletin().getBulletin().getInscription().getClasse().readId(true));
+    System.out.println(b.getDetailBulletin().readId(true));
+    System.out.println(b.readId(true));
   }
   
 }

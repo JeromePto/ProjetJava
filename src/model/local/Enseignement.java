@@ -42,6 +42,11 @@ public class Enseignement {
     this.discipline = discipline;
     this.professeur = professeur;
   }
+  
+  public String readId(boolean printId) {
+    String tmp = discipline.readId(false) + " " + classe.readId(false) + " " + professeur.readId(false);
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
 
   @Override
   public String toString() {

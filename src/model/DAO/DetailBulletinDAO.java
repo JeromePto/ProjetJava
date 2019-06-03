@@ -22,8 +22,8 @@ import model.local.Enseignement;
  */
 public class DetailBulletinDAO extends DAO<DetailBulletin> {
 
-  public DetailBulletinDAO(Connection connect) {
-    super(connect);
+  public DetailBulletinDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

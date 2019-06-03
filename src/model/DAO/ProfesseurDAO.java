@@ -20,8 +20,8 @@ import model.local.Professeur;
  */
 public class ProfesseurDAO extends DAO<Professeur> {
 
-  public ProfesseurDAO(Connection connect) {
-    super(connect);
+  public ProfesseurDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

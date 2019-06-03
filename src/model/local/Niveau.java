@@ -28,6 +28,11 @@ public class Niveau {
   public String getNom() {
     return nom;
   }
+  
+  public String readId(boolean printId) {
+    String tmp = nom;
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
 
   @Override
   public String toString() {

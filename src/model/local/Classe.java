@@ -47,5 +47,10 @@ public class Classe {
 
   public Niveau getNiveau() {
     return niveau;
-  } 
+  }
+  
+  public String readId(boolean printId) {
+    String tmp = nom + " " + anneeScolaire.readId(false);
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
 }

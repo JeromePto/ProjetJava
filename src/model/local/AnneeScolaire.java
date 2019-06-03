@@ -24,8 +24,9 @@ public class AnneeScolaire {
     return id;
   }
   
-  public String read() {
-    return String.valueOf(id);
+  public String readId(boolean printId) {
+    String tmp = String.valueOf(id) + "-" + String.valueOf(id+1);
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
   }
 
 }

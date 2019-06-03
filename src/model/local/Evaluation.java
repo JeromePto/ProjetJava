@@ -49,6 +49,10 @@ public class Evaluation {
     return detailBulletin;
   }
   
+  public String readId(boolean printId) {
+    String tmp = note + " " + detailBulletin.readId(false);
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
 
   @Override
   public String toString() {

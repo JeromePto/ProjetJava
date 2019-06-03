@@ -22,8 +22,8 @@ import model.local.Niveau;
  */
 public class ClasseDAO extends DAO<Classe> {
 
-  public ClasseDAO(Connection connect) {
-    super(connect);
+  public ClasseDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

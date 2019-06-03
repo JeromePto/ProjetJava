@@ -81,6 +81,10 @@ public class DetailBulletin {
     return bulletin;
   }
 
+  public String readId(boolean printId) {
+    String tmp = enseignement.readId(false) + " " + bulletin.readId(false);
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
   
   @Override
   public String toString() {

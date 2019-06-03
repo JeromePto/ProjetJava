@@ -22,8 +22,8 @@ import model.local.Inscription;
  */
 public class InscriptionDAO extends DAO<Inscription> {
 
-  public InscriptionDAO(Connection connect) {
-    super(connect);
+  public InscriptionDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

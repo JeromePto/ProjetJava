@@ -19,12 +19,12 @@ public abstract class Personne {
   /**
    * Surname Personne
    */
-  protected String Prenom;
+  protected String prenom;
 
-  public Personne(int id, String nom, String Prenom) {
+  public Personne(int id, String nom, String prenom) {
     this.id = id;
     this.nom = nom;
-    this.Prenom = Prenom;
+    this.prenom = prenom;
   }
 
   /**
@@ -36,7 +36,7 @@ public abstract class Personne {
 
   @Override
   public String toString() {
-    return "Personne{" + "id=" + id + ", nom=" + nom + ", Prenom=" + Prenom + '}';
+    return "Personne{" + "id=" + id + ", nom=" + nom + ", Prenom=" + prenom + '}';
   }
 
   public int getId() {
@@ -48,7 +48,13 @@ public abstract class Personne {
   }
 
   public String getPrenom() {
-    return Prenom;
+    return prenom;
   }
+  
+  public String readId(boolean printId) {
+    String tmp = (isEleve() ? "Eleve" : "Prof") + " " + prenom + " " + nom;
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
+  
     
 }

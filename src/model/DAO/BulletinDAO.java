@@ -22,8 +22,8 @@ import model.local.Trimestre;
  */
 public class BulletinDAO extends DAO<Bulletin> {
 
-  public BulletinDAO(Connection connect) {
-    super(connect);
+  public BulletinDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

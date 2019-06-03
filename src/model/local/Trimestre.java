@@ -68,6 +68,11 @@ public class Trimestre {
     this.fin = Calendar.getInstance();
     this.fin.setTime(fin);
   }
+  
+  public String readId(boolean printId) {
+    String tmp = "T" + numero + " " + anneeScolaire.readId(false);
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
 
   @Override
   public String toString() {

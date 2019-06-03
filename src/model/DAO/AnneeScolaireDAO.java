@@ -20,8 +20,8 @@ import model.local.AnneeScolaire;
  */
 public class AnneeScolaireDAO extends DAO<AnneeScolaire> {
 
-  public AnneeScolaireDAO(Connection connect) {
-    super(connect);
+  public AnneeScolaireDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

@@ -20,8 +20,8 @@ import model.local.Eleve;
  */
 public class EleveDAO extends DAO<Eleve> {
 
-  public EleveDAO(Connection connect) {
-    super(connect);
+  public EleveDAO(Connection connect, String table) {
+    super(connect, table);
   }
 
   @Override

@@ -94,8 +94,9 @@ public class Bulletin {
     return inscription;
   }
   
-  public String read() {
-    return String.valueOf(id) + " info bulletin"; //TODO complete this
+  public String readId(boolean printId) {
+    String tmp = trimestre.readId(false) + " " + inscription.readId(false);
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
   }
 
 }

@@ -23,5 +23,9 @@ public class AnneeScolaire {
   public int getId() {
     return id;
   }
+  
+  public String read() {
+    return String.valueOf(id);
+  }
 
 }

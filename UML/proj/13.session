@@ -1,0 +1,25 @@
+window_sizes 1686 901 314 1367 751 104
+windowsvista_style
+diagrams
+  active  classdiagram_ref 128013 // diag
+    1367 751 100 A4-Landscape 0 0
+end
+show_stereotypes
+selected operation_ref 128013 // isEleve
+open
+  class_ref 128013 // AnneeScolaire
+  class_ref 128141 // Niveau
+  class_ref 128269 // Classe
+  class_ref 128397 // Trimestre
+  class_ref 128525 // Personne
+  class_ref 128653 // Inscription
+  class_ref 128781 // Bulletin
+  class_ref 128909 // Discipline
+  class_ref 129037 // Enseignement
+  class_ref 129165 // DetailBulletin
+  class_ref 129293 // Evaluation
+  class_ref 129421 // Eleve
+  class_ref 129549 // Professeur
+  artifact_ref 128525 // Bulletin
+end
+end

@@ -1,0 +1,133 @@
+format 215
+
+classcanvas 128013 class_ref 128013 // AnneeScolaire
+  classdiagramsettings member_max_width 0 end
+  xyz 198 42 2000
+end
+classcanvas 128141 class_ref 128141 // Niveau
+  classdiagramsettings member_max_width 0 end
+  xyz 38 256 2000
+end
+classcanvas 128269 class_ref 128269 // Classe
+  classdiagramsettings member_max_width 0 end
+  xyz 201 247 2000
+end
+classcanvas 128653 class_ref 128397 // Trimestre
+  classdiagramsettings member_max_width 0 end
+  xyz 431 19 2000
+end
+classcanvas 128909 class_ref 128525 // Personne
+  classdiagramsettings member_max_width 0 end
+  xyz 366 471 2000
+end
+classcanvas 129037 class_ref 129421 // Eleve
+  classdiagramsettings member_max_width 0 end
+  xyz 221 493 2000
+end
+classcanvas 129293 class_ref 129549 // Professeur
+  classdiagramsettings member_max_width 0 end
+  xyz 584 495 2000
+end
+classcanvas 129549 class_ref 128653 // Inscription
+  classdiagramsettings member_max_width 0 end
+  xyz 208 377 2000
+end
+classcanvas 130573 class_ref 128781 // Bulletin
+  classdiagramsettings member_max_width 0 end
+  xyz 424 368 2000
+end
+classcanvas 130957 class_ref 128909 // Discipline
+  classdiagramsettings member_max_width 0 end
+  xyz 875 237 2000
+end
+classcanvas 131085 class_ref 129037 // Enseignement
+  classdiagramsettings member_max_width 0 end
+  xyz 573 253 2000
+end
+classcanvas 131981 class_ref 129165 // DetailBulletin
+  classdiagramsettings member_max_width 0 end
+  xyz 759 366 2000
+end
+classcanvas 132877 class_ref 129293 // Evaluation
+  classdiagramsettings member_max_width 0 end
+  xyz 759 516 2000
+end
+relationcanvas 128397 relation_ref 128013 // <composition>
+  from ref 128269 z 2001 stereotype "<<List>>" xyz 219.5 166.5 3000 to ref 128013
+  role_a_pos 254 94 3000 role_b_pos 254 229 3000
+  multiplicity_a_pos 228 94 3000 multiplicity_b_pos 228 229 3000
+end
+relationcanvas 128525 relation_ref 128141 // <composition>
+  from ref 128269 z 2001 stereotype "<<List>>" xyz 123.5 277.5 3000 to ref 128141
+  role_a_pos 106 261 3000 role_b_pos 156 260 3000
+  multiplicity_a_pos 106 284 3000 multiplicity_b_pos 184 283 3000
+end
+relationcanvas 128781 relation_ref 128269 // <composition>
+  from ref 128653 z 2001 stereotype "<<List>>" xyz 335.5 64 3000 to ref 128013
+  role_a_pos 300 47 3000 role_b_pos 372 47 3000
+  multiplicity_a_pos 300 70 3000 multiplicity_b_pos 414 70 3000
+end
+relationcanvas 129165 relation_ref 128397 // <generalisation>
+  from ref 129037 z 2001 to ref 128909
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129421 relation_ref 128525 // <generalisation>
+  from ref 129293 z 2001 to ref 128909
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129677 relation_ref 128653 // <composition>
+  from ref 129549 z 2001 stereotype "<<List>>" xyz 220 341 3000 to ref 128269
+  role_a_pos 254 313 3000 role_b_pos 254 359 3000
+  multiplicity_a_pos 228 313 3000 multiplicity_b_pos 228 359 3000
+end
+relationcanvas 129933 relation_ref 128909 // <composition>
+  from ref 129549 z 2001 stereotype "<<List>>" xyz 219 457 3000 to ref 129037
+  role_a_pos 253 475 3000 role_b_pos 253 429 3000
+  multiplicity_a_pos 227 475 3000 multiplicity_b_pos 227 429 3000
+end
+relationcanvas 130701 relation_ref 129037 // <composition>
+  from ref 130573 z 2001 stereotype "<<List>>" xyz 460.5 238 3000 to ref 128653
+  role_a_pos 495 115 3000 role_b_pos 495 350 3000
+  no_multiplicity_a multiplicity_b_pos 469 350 3000
+end
+relationcanvas 130829 relation_ref 129165 // <composition>
+  from ref 130573 z 2001 stereotype "<<List>>" xyz 327 400 3000 to ref 129549
+  role_a_pos 290 383 3000 role_b_pos 374 384 3000
+  no_multiplicity_a multiplicity_b_pos 407 407 3000
+end
+relationcanvas 131213 relation_ref 129293 // <composition>
+  from ref 131085 z 2001 stereotype "<<List>>" xyz 405.5 276 3000 to ref 128269
+  role_a_pos 297 259 3000 role_b_pos 490 259 3000
+  multiplicity_a_pos 297 282 3000 multiplicity_b_pos 556 282 3000
+end
+relationcanvas 131341 relation_ref 129421 // <composition>
+  decenter_begin 319
+  from ref 131085 z 2001 stereotype "<<List>>" xyz 760.5 254 3000 to ref 130957
+  role_a_pos 822 250 3000 role_b_pos 675 250 3000
+  multiplicity_a_pos 858 273 3000 multiplicity_b_pos 675 273 3000
+end
+relationcanvas 131725 relation_ref 129549 // <composition>
+  from ref 131085 z 2001 stereotype "<<List>>" xyz 600 343 3000 to ref 129293
+  role_a_pos 629 477 3000 role_b_pos 629 305 3000
+  multiplicity_a_pos 603 477 3000 multiplicity_b_pos 603 305 3000
+end
+relationcanvas 132237 relation_ref 129805 // <composition>
+  decenter_end 764
+  from ref 131981 z 2001 stereotype "<<List>>" xyz 797 326 3000 to point 819 286
+  line 132493 z 2001 to ref 131085
+  role_a_pos 675 271 3000 role_b_pos 831 348 3000
+  multiplicity_a_pos 675 294 3000 multiplicity_b_pos 805 348 3000
+end
+relationcanvas 132621 relation_ref 129933 // <composition>
+  from ref 131981 z 2001 stereotype "<<List>>" xyz 657 402 3000 to ref 130573
+  role_a_pos 558 385 3000 role_b_pos 683 384 3000
+  multiplicity_a_pos 558 408 3000 no_multiplicity_b
+end
+relationcanvas 133005 relation_ref 130061 // <composition>
+  from ref 132877 z 2001 stereotype "<<List>>" xyz 797 475 3000 to ref 131981
+  role_a_pos 831 442 3000 role_b_pos 831 498 3000
+  multiplicity_a_pos 805 442 3000 multiplicity_b_pos 805 498 3000
+end
+end

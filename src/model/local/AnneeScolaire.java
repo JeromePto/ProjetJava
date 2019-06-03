@@ -1,6 +1,9 @@
 
 package model.local;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * 
  * @author Jerome
@@ -25,8 +28,17 @@ public class AnneeScolaire {
   }
   
   public String readId(boolean printId) {
-    String tmp = String.valueOf(id) + "-" + String.valueOf(id+1);
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
     return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
+  
+  Set<String> getInfo() {
+    Set<String> out = new LinkedHashSet<>();
+    out.add(String.valueOf(id) + "-" + String.valueOf(id+1));
+    return out;
   }
 
 }

@@ -1,6 +1,9 @@
 
 package model.local;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * 
  * @author Jerome
@@ -37,8 +40,18 @@ public class Inscription {
   }
   
   public String readId(boolean printId) {
-    String tmp = eleve.readId(false) + " " + classe.readId(false);
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
     return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
+  
+  Set<String> getInfo() {
+    Set<String> out = new LinkedHashSet<>();
+    out.addAll(eleve.getInfo());
+    out.addAll(classe.getInfo());
+    return out;
   }
 
   @Override

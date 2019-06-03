@@ -1,6 +1,9 @@
 
 package model.local;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * 
  * @author Jerome
@@ -30,8 +33,17 @@ public class Niveau {
   }
   
   public String readId(boolean printId) {
-    String tmp = nom;
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
     return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
+  
+  Set<String> getInfo() {
+    Set<String> out = new LinkedHashSet<>();
+    out.add(nom);
+    return out;
   }
 
   @Override

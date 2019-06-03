@@ -4,6 +4,8 @@ package model.local;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.EcoleConnection;
@@ -82,8 +84,18 @@ public class DetailBulletin {
   }
 
   public String readId(boolean printId) {
-    String tmp = enseignement.readId(false) + " " + bulletin.readId(false);
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
     return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
+  
+  Set<String> getInfo() {
+    Set<String> out = new LinkedHashSet<>();
+    out.addAll(enseignement.getInfo());
+    out.addAll(bulletin.getInfo());
+    return out;
   }
   
   @Override

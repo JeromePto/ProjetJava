@@ -1,6 +1,9 @@
 
 package model.local;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * 
  * @author Jerome
@@ -50,8 +53,18 @@ public class Evaluation {
   }
   
   public String readId(boolean printId) {
-    String tmp = note + " " + detailBulletin.readId(false);
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
     return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
+  
+  Set<String> getInfo() {
+    Set<String> out = new LinkedHashSet<>();
+    out.add(String.valueOf(note));
+    out.addAll(detailBulletin.getInfo());
+    return out;
   }
 
   @Override

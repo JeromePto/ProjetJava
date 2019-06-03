@@ -1,6 +1,9 @@
 
 package model.local;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * 
  * @author Jerome
@@ -44,10 +47,21 @@ public class Enseignement {
   }
   
   public String readId(boolean printId) {
-    String tmp = discipline.readId(false) + " " + classe.readId(false) + " " + professeur.readId(false);
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
     return printId ? String.valueOf(id) + " : " + tmp : tmp;
   }
 
+  Set<String> getInfo() {
+    Set<String> out = new LinkedHashSet<>();
+    out.addAll(discipline.getInfo());
+    out.addAll(classe.getInfo());
+    out.addAll(professeur.getInfo());
+    return out;
+  }
+  
   @Override
   public String toString() {
     return "Enseignement{" + "id=" + id + ", classe=" + classe + ", discipline=" + discipline + ", professeur=" + professeur + '}';

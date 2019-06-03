@@ -2,6 +2,8 @@ package model.local;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  *
@@ -70,8 +72,18 @@ public class Trimestre {
   }
   
   public String readId(boolean printId) {
-    String tmp = "T" + numero + " " + anneeScolaire.readId(false);
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
     return printId ? String.valueOf(id) + " : " + tmp : tmp;
+  }
+  
+  Set<String> getInfo() {
+    Set<String> out = new LinkedHashSet<>();
+    out.add("T" + numero);
+    out.addAll(anneeScolaire.getInfo());
+    return out;
   }
 
   @Override
@@ -79,5 +91,4 @@ public class Trimestre {
     return "Trimestre{" + "id=" + id + ", anneeScolaire=" + anneeScolaire + ", numero=" + numero + ", debut=" + debut.getTime() + ", fin=" + fin.getTime() + '}';
   }
 
-  
 }

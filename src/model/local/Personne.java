@@ -1,5 +1,8 @@
 package model.local;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  *
  * @author Jerome
@@ -52,9 +55,16 @@ public abstract class Personne {
   }
   
   public String readId(boolean printId) {
-    String tmp = (isEleve() ? "Eleve" : "Prof") + " " + prenom + " " + nom;
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
     return printId ? String.valueOf(id) + " : " + tmp : tmp;
   }
   
-    
+  Set<String> getInfo() {
+    Set<String> out = new LinkedHashSet<>();
+    out.add((isEleve() ? "Eleve" : "Prof") + " " + prenom + " " + nom);
+    return out;
+  }  
 }

@@ -22,7 +22,6 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Jerome
  */
-//Tableau principal en JPanel
 public class MainTable extends JPanel{
 
   private JTable table;
@@ -44,7 +43,10 @@ public class MainTable extends JPanel{
     add(scrollPane);
     validate();
  }
-  
+  /**
+   * Pour creer une nouvelle table à partir du modele
+   * @param model modele contenant les informations de la table
+   */
   private void createTable(TableModel model) {
     table = new JTable(model);
     table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -10,9 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.local.Professeur;
+import model.local.TableRow;
 
 /**
  *
@@ -88,6 +91,23 @@ public class ProfesseurDAO extends DAO<Professeur> {
       Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
     }
     return prof;
+  }
+  
+  @Override
+  public Map<Integer, TableRow> findAll() {
+    Map<Integer, TableRow> out = new HashMap<>();    
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM " + table + " WHERE TYPE = 2");
+      while(result.next()) {
+        out.put(result.getInt("ID"), (TableRow) this.find(result.getInt("ID")));
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return out;
   }
   
 }

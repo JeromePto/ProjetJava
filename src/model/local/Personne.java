@@ -1,13 +1,15 @@
 package model.local;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author Jerome
  */
-public abstract class Personne {
+public abstract class Personne extends TableRow {
 
   /**
    * Peronne ID
@@ -67,4 +69,22 @@ public abstract class Personne {
     out.add((isEleve() ? "Eleve" : "Prof") + " " + prenom + " " + nom);
     return out;
   }  
+
+  @Override
+  public List<String> getStringRow() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    out.add(prenom);
+    return out;
+  }
+
+  @Override
+  public List<String> getColumnName() {
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Nom");
+    out.add("Prenom");
+    return out;
+  }
 }

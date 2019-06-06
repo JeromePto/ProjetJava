@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.local.TableRow;
 
 /**
  * @param <T>
@@ -65,19 +66,20 @@ public abstract class DAO<T> {
    */
   public abstract T find(int id) throws IllegalArgumentException;
   
-  public Map<Integer, T> findAll() {
-    Map<Integer, T> out = new HashMap<>();    
+  public Map<Integer, TableRow> findAll() {
+    Map<Integer, TableRow> out = new HashMap<>();    
     try {
       ResultSet result = this.connect.createStatement(
           ResultSet.TYPE_SCROLL_INSENSITIVE,
           ResultSet.CONCUR_READ_ONLY).executeQuery(
               "SELECT * FROM " + table + " WHERE 1");
       while(result.next()) {
-        out.put(result.getInt("ID"), this.find(result.getInt("ID")));
+        out.put(result.getInt("ID"), (TableRow) this.find(result.getInt("ID")));
       }
     } catch (SQLException ex) {
       Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
     }
     return out;
   }
+  
 }

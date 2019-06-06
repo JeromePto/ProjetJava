@@ -3,7 +3,9 @@ package model.local;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +15,7 @@ import model.EcoleConnection;
  *
  * @author Jerome
  */
-public class Bulletin {
+public class Bulletin extends TableRow {
 
   /**
    * Bulletin ID
@@ -108,6 +110,28 @@ public class Bulletin {
     Set<String> out = new LinkedHashSet<>();
     out.addAll(trimestre.getInfo());
     out.addAll(inscription.getInfo());
+    return out;
+  }
+
+  @Override
+  public List<String> getStringRow() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(appreciation);
+    out.add(trimestre.readId(true));
+    out.add(inscription.readId(true));
+    out.add(getStringAverage());
+    return out;
+  }
+
+  @Override
+  public List<String> getColumnName() {
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Apperciation");
+    out.add("Trimestre");
+    out.add("Inscription");
+    out.add("Moyenne");
     return out;
   }
 

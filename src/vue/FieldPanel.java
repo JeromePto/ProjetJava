@@ -22,7 +22,10 @@ public class FieldPanel extends JPanel{
   List<JLabel> headers;
   List<JTextField> fields;
   EcoleFieldModel model;
-
+/**
+ * 
+ * @param model 
+ */
   public FieldPanel(EcoleFieldModel model) {
     super();
     headers = new ArrayList<>();

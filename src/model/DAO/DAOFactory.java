@@ -67,7 +67,11 @@ public class DAOFactory {
   public static DAO getDetailBulletinDAO() {
     return new DetailBulletinDAO(connect, "detailbulletin");
   }
-
+/**
+ * 
+ * @param id de l'objet
+ * @return 
+ */
   public static DAO getDAOById(int id) {
     switch (id) {
       case TABLE.ANNEESCOLAIRE:

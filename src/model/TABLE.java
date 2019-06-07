@@ -6,7 +6,7 @@
 package model;
 
 /**
- *
+ * classe de constante qui permet d'assigner des ID et des noms au tables
  * @author Jerome
  */
 public class TABLE {
@@ -23,10 +23,14 @@ public class TABLE {
   public final static int NIVEAU = 9;
   public final static int PROFESSEUR = 10;
   public final static int TRIMESTRE = 11;
-  
+  /**
+   * modifie les noms des tables 
+   * @param id
+   * @return 
+   */
   public final static String name(int id) {
     switch (id) {
-      case TABLE.ANNEESCOLAIRE:
+      case TABLE.ANNEESCOLAIRE: //Modifie les 
         return "Année scolaire";
       case TABLE.BULLETIN:
         return "Bulletin";

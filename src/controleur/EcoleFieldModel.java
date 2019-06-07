@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controleur;
 
 import java.util.ArrayList;
@@ -14,12 +9,19 @@ import model.local.TableRow;
  *
  * @author Jerome
  */
+/**
+ * 
+ * Classe modele pour les champs 
+ */
 public class EcoleFieldModel {
   
   private List<String> fieldNames;
   private List<String> datas;
   private List<Boolean> disable;
-  
+  /**
+   * 
+   * @param rows 
+   */
   public EcoleFieldModel(Map<Integer, TableRow> rows) {
     if (!rows.isEmpty()) {
       datas = new ArrayList<>();

@@ -22,6 +22,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Jerome
  */
+//Tableau principal en JPanel
 public class MainTable extends JPanel{
 
   private JTable table;

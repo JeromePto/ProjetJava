@@ -1,7 +1,9 @@
 
 package model.local;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -9,7 +11,7 @@ import java.util.Set;
  * 
  * @author Jerome
  */
-public class Classe {
+public class Classe extends TableRow {
   /**
    * Classe ID
    */
@@ -64,6 +66,26 @@ public class Classe {
     Set<String> out = new LinkedHashSet<>();
     out.add(nom);
     out.addAll(anneeScolaire.getInfo());
+    return out;
+  }
+
+  @Override
+  public List<String> getStringRow() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    out.add(anneeScolaire.readId(true));
+    out.add(niveau.readId(true));
+    return out;
+  }
+
+  @Override
+  public List<String> getColumnName() {
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Nom");
+    out.add("Année Scolaire");
+    out.add("Niveau");
     return out;
   }
 }

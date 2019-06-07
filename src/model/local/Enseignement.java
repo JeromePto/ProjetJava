@@ -1,14 +1,16 @@
 
 package model.local;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * 
  * @author Jerome
  */
-public class Enseignement {
+public class Enseignement extends TableRow{
   /**
    * Enseignement ID
    */
@@ -67,4 +69,23 @@ public class Enseignement {
     return "Enseignement{" + "id=" + id + ", classe=" + classe + ", discipline=" + discipline + ", professeur=" + professeur + '}';
   }
   
+  @Override
+  public List<String> getStringRow() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(classe.readId(true));
+    out.add(discipline.readId(true));
+    out.add(professeur.readId(true));
+    return out;
+  }
+
+  @Override
+  public List<String> getColumnName() {
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Classe");
+    out.add("Discipline");
+    out.add("Professeur");
+    return out;
+  }
 }

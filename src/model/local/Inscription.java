@@ -1,14 +1,16 @@
 
 package model.local;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * 
  * @author Jerome
  */
-public class Inscription {
+public class Inscription extends TableRow{
   /**
    * Inscription ID
    */
@@ -57,5 +59,23 @@ public class Inscription {
   @Override
   public String toString() {
     return "Inscription{" + "id=" + id + ", classe=" + classe + ", eleve=" + eleve + '}';
+  }
+  
+  @Override
+  public List<String> getStringRow() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(classe.readId(true));
+    out.add(eleve.readId(true));
+    return out;
+  }
+
+  @Override
+  public List<String> getColumnName() {
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Classe");
+    out.add("Eleve");
+    return out;
   }
 }

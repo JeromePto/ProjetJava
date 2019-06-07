@@ -5,7 +5,7 @@
  */
 package project2v2;
 
-import controleur.TableManagement;
+import controleur.Management;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +19,7 @@ import model.DAO.DAO;
 import model.DAO.DAOFactory;
 import model.TABLE;
 import model.local.*;
+import vue.MainFrame;
 import vue.MainTable;
 
 /**
@@ -51,7 +52,6 @@ public class Project2v2 {
 //      ex.printStackTrace();
 //    }
 //    System.out.println(b);
-    
     //System.out.println(a.findAll()); renvoie une map 
 //    System.out.println(b.getDetailBulletin().getStringAverage());
 //    System.out.println(b.getDetailBulletin().getBulletin().getStringAverage());
@@ -64,22 +64,22 @@ public class Project2v2 {
 //    System.out.println(b.getDetailBulletin().readId(true));
 //    System.out.println(b.readId(true)); 
     //salut
-    
-    
-    
-    JFrame frame = new JFrame("Test");
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    TableManagement a = new TableManagement();
-    MainTable table = a.getTable();
-    
-    frame.setContentPane(table);
-    //frame.setMinimumSize(new Dimension(600, 600));
-    frame.pack();
-    frame.setVisible(true);
-    //table.changeTable();
-    System.out.println(TABLE.BULLETIN);
-    //a.switchTable(TableManagement.TABLE_ANNEESCOLAIRE);
-    a.switchTable(TABLE.PROFESSEUR);
+//    JFrame frame = new JFrame("Test");
+//    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//    Management a = new Management();
+//    MainTable table = a.getTable();
+//    
+//    frame.setContentPane(table);
+//    //frame.setMinimumSize(new Dimension(600, 600));
+//    frame.pack();
+//    frame.setVisible(true);
+//    a.switchTable(TABLE.PROFESSEUR);
+
+
+    Management management = new Management();
+    MainFrame mainFrame = new MainFrame(management);
+    mainFrame.setVisible(true);
+    management.switchTable(TABLE.EVALUATION);
   }
   
 }

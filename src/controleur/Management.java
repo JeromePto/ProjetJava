@@ -8,34 +8,42 @@ package controleur;
 import java.util.Map;
 import model.DAO.DAO;
 import model.DAO.DAOFactory;
-import model.EcoleTableModel;
 import model.local.AnneeScolaire;
 import model.local.TableRow;
+import vue.FieldPanel;
 import vue.MainTable;
 
 /**
  *
  * @author Jerome
  */
-public class TableManagement {  
+public class Management implements ManagementInterface{  
 
   private Map<Integer, TableRow> datas;
-
   private final MainTable table;
+  private final FieldPanel field;
 
-  public TableManagement() {
-    DAO<AnneeScolaire> dao = DAOFactory.getAnneeScolaireDAO();
+  public Management() {
+    DAO<AnneeScolaire> dao = DAOFactory.getBulletinDAO();
     datas = dao.findAll();
     table = new MainTable(new EcoleTableModel(datas));
+    field = new FieldPanel(new EcoleFieldModel(datas));
   }
 
   public void switchTable(int tableId) {
     DAO dao = DAOFactory.getDAOById(tableId);
     datas = dao.findAll();
     table.changeTable(new EcoleTableModel(datas));
+    field.changeField(new EcoleFieldModel(datas));
   }
 
+  @Override
   public MainTable getTable() {
     return table;
+  }
+  
+  @Override
+  public FieldPanel getField() {
+    return field;
   }
 }

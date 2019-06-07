@@ -4,7 +4,9 @@ package model.local;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +16,7 @@ import model.EcoleConnection;
  * 
  * @author Jerome
  */
-public class DetailBulletin {
+public class DetailBulletin extends TableRow{
   /**
    * DetailBulletin ID
    */
@@ -101,6 +103,28 @@ public class DetailBulletin {
   @Override
   public String toString() {
     return "DetailBulletin{" + "id=" + id + ", appreciation=" + appreciation + ", enseignement=" + enseignement + ", bulletin=" + bulletin + '}';
+  }
+
+  @Override
+  public List<String> getStringRow() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(appreciation);
+    out.add(enseignement.readId(true));
+    out.add(bulletin.readId(true));
+    out.add(getStringAverage());
+    return out;
+  }
+
+  @Override
+  public List<String> getColumnName() {
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Apperciation");
+    out.add("Trimestre");
+    out.add("Inscription");
+    out.add("Moyenne");
+    return out;
   }
 
   

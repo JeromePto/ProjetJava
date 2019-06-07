@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package controleur;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +52,11 @@ public class EcoleTableModel extends AbstractTableModel{
   public String getColumnName(int column) {
     return columnNames.get(column);
   }
+  
+  @Override
+  public Class getColumnClass(int c) {
+            return getValueAt(0, c).getClass();
+        }
   
   
 }

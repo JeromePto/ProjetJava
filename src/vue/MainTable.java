@@ -19,11 +19,12 @@ import javax.swing.table.TableModel;
 public class MainTable extends JPanel{
 
   private JTable table;
-  JScrollPane scrollPane;
+  private JScrollPane scrollPane;
   
   public MainTable(TableModel model) {
     super(new GridLayout(1,0));
     table = new JTable(model);
+    //table.setAutoCreateRowSorter(true);
     //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
     table.setFillsViewportHeight(true);
     scrollPane = new JScrollPane(table);
@@ -33,6 +34,7 @@ public class MainTable extends JPanel{
   public void changeTable(TableModel model) {
     remove(scrollPane);
     table = new JTable(model);
+    //table.setAutoCreateRowSorter(true);
     //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
     table.setFillsViewportHeight(true);
     scrollPane = new JScrollPane(table);

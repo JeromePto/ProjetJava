@@ -24,4 +24,35 @@ public class TABLE {
   public final static int PROFESSEUR = 10;
   public final static int TRIMESTRE = 11;
   
+  public final static String name(int id) {
+    switch (id) {
+      case TABLE.ANNEESCOLAIRE:
+        return "Année scolaire";
+      case TABLE.BULLETIN:
+        return "Bulletin";
+      case TABLE.CLASSE:
+        return "Classe";
+      case TABLE.DETAILBULLETIN:
+        return "Detail bulletin";
+      case TABLE.DISCIPLINE:
+        return "Discipline";
+      case TABLE.ELEVE:
+        return "Eleve";
+      case TABLE.ENSEIGNEMENT:
+        return "Enseignement";
+      case TABLE.EVALUATION:
+        return "Evaluation";
+      case TABLE.INSCRIPTION:
+        return "Inscription";
+      case TABLE.NIVEAU:
+        return "Niveau";
+      case TABLE.PROFESSEUR:
+        return "Professeur";
+      case TABLE.TRIMESTRE:
+        return "Trimestre";
+      default:
+        throw new RuntimeException("Internal error");
+    }
+  }
+  
 }

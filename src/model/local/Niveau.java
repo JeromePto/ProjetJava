@@ -1,14 +1,16 @@
 
 package model.local;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * 
  * @author Jerome
  */
-public class Niveau {
+public class Niveau extends TableRow{
   /**
    * Niveau ID
    */
@@ -51,4 +53,19 @@ public class Niveau {
     return "Niveau{" + "id=" + id + ", nom=" + nom + '}';
   }
   
+  @Override
+  public List<String> getStringRow() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    return out;
+  }
+
+  @Override
+  public List<String> getColumnName() {
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Nom");
+    return out;
+  }
 }

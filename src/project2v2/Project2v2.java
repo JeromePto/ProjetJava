@@ -29,6 +29,7 @@ import model.TABLE;
 import model.local.*;
 import vue.MainFrame;
 import vue.MainTable;
+import vue.ReportingFrame;
 
 /**
  *
@@ -82,12 +83,6 @@ public class Project2v2 {
     //    frame.pack();
     //    frame.setVisible(true);
     //    a.switchTable(TABLE.PROFESSEUR);
-
-    
-    Management management = new Management();
-    MainFrame mainFrame = new MainFrame(management);
-    mainFrame.setVisible(true);
-    //management.switchTable(TABLE.EVALUATION);
   }
 
 }

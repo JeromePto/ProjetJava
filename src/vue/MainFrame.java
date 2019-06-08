@@ -39,6 +39,7 @@ public class MainFrame extends JFrame implements ActionListener {
   private ManagementInterface management;
 
   public MainFrame(ManagementInterface management) {
+    super();
     this.management = management;
     this.tablePanel = management.getTable();
     this.fieldPanel = management.getField();

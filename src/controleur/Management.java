@@ -7,6 +7,7 @@ package controleur;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
@@ -28,7 +29,9 @@ import model.local.Professeur;
 import model.local.TableRow;
 import model.local.Trimestre;
 import vue.FieldPanel;
+import vue.MainFrame;
 import vue.MainTable;
+import vue.ReportingFrame;
 
 /**
  *
@@ -39,6 +42,7 @@ public class Management implements ManagementInterface {
   private Map<Integer, TableRow> datas;
   private final MainTable table;
   private final FieldPanel field;
+  private final ReportingFrame report;
   private DAO dao;
   private int type;
 
@@ -48,6 +52,7 @@ public class Management implements ManagementInterface {
     datas = dao.findAll();
     table = new MainTable(new EcoleTableModel(datas), this);
     field = new FieldPanel(new EcoleFieldModel(datas));
+    report = new ReportingFrame(this);
   }
 
   @Override
@@ -78,14 +83,10 @@ public class Management implements ManagementInterface {
     int i = 0;
     for (Map.Entry<Integer, TableRow> entry : datas.entrySet()) {
       if (i == row) {
-        fieldUpdate(entry.getValue());
+        field.fillField(entry.getValue().getStringRowField());
       }
       i++;
     }
-  }
-
-  private void fieldUpdate(TableRow row) {
-    field.fillField(row.getStringRowField());
   }
 
   private TableRow rowFromField() throws NumberFormatException, SQLException, IllegalArgumentException {
@@ -237,4 +238,20 @@ public class Management implements ManagementInterface {
     }
   }
 
+  @Override
+  public Map<String, Integer> getReporting() {
+    Map<String, Integer> out = new HashMap<>();
+    DAO<Classe> dao = DAOFactory.getClasseDAO();
+    DAO<Inscription> dao2 = DAOFactory.getInscriptionDAO();
+    for (Map.Entry<Integer, TableRow> it : dao.findAll().entrySet()) {
+      out.put(((Classe) it.getValue()).getNom(), 0);
+      for (Map.Entry<Integer, TableRow> it2 : dao2.findAll().entrySet()) {
+        if (((Inscription) it2.getValue()).getClasse().getNom().equals(((Classe) it.getValue()).getNom())) {
+          out.replace(((Classe) it.getValue()).getNom(), out.get(((Classe) it.getValue()).getNom())+1);
+        }
+      }
+    }
+    return out;
+  }
+  
 }

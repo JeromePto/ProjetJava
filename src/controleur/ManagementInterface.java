@@ -5,6 +5,7 @@
  */
 package controleur;
 
+import java.util.Map;
 import vue.FieldPanel;
 import vue.MainTable;
 
@@ -20,4 +21,5 @@ public interface ManagementInterface {
   public void create();
   public void update();
   public void delete();
+  public Map<String, Integer> getReporting();
 }

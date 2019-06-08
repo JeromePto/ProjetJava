@@ -15,8 +15,8 @@ import model.local.TableRow;
  *
  * @author Jerome
  */
-public class EcoleTableModel extends AbstractTableModel{
-  
+public class EcoleTableModel extends AbstractTableModel {
+
   private List<String> columnNames;
   private List<List<String>> datas;
 
@@ -32,7 +32,7 @@ public class EcoleTableModel extends AbstractTableModel{
       }
     }
   }
-  
+
   @Override
   public int getRowCount() {
     return datas.size();
@@ -45,18 +45,24 @@ public class EcoleTableModel extends AbstractTableModel{
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
+    int tmp;
+    try {
+      tmp = Integer.parseInt(datas.get(rowIndex).get(columnIndex));
+      return tmp;
+    } catch (NumberFormatException ex) {
+    }
     return datas.get(rowIndex).get(columnIndex);
+
   }
 
   @Override
   public String getColumnName(int column) {
     return columnNames.get(column);
   }
-  
+
   @Override
   public Class getColumnClass(int c) {
-            return getValueAt(0, c).getClass();
-        }
-  
-  
+    return getValueAt(0, c).getClass();
+  }
+
 }

@@ -16,6 +16,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -54,8 +55,7 @@ public class MainTable extends JPanel{
         }
       }
     });
-    //table.setAutoCreateRowSorter(true);
-    //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+    table.setAutoCreateRowSorter(true);
     table.setFillsViewportHeight(true);
   }
 }

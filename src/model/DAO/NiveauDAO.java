@@ -28,54 +28,32 @@ public class NiveauDAO extends DAO<Niveau> {
   }
 
   @Override
-  public boolean create(Niveau obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "INSERT INTO niveau (NOM) VALUES(?)");
-      statement.setObject(1, obj.getNom(), Types.VARCHAR);
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean create(Niveau obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO niveau (NOM) VALUES(?)");
+    statement.setObject(1, obj.getNom(), Types.VARCHAR);
+    statement.executeUpdate();
     return true;
   }
 
   @Override
-  public boolean delete(Niveau obj) {
-    try {
-      this.connect.createStatement().executeUpdate(
-          "DELETE FROM niveau WHERE ID = " + obj.getId());
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean update(Niveau obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE niveau "
+        + "SET NOM = ? "
+        + "WHERE ID = ?");
+    statement.setString(1, obj.getNom());
+    statement.setInt(2, obj.getId());
+    statement.executeUpdate();
     return true;
   }
 
   @Override
-  public boolean update(Niveau obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "UPDATE niveau "
-              + "SET NOM = ? "
-              + "WHERE ID = ?");
-      statement.setString(1, obj.getNom());
-      statement.setInt(2, obj.getId());
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public Niveau find(int id) throws IllegalArgumentException{
+  public Niveau find(int id) throws IllegalArgumentException {
     Niveau niv = null;
     try {
       ResultSet result = this.connect.createStatement(
-          ResultSet.TYPE_SCROLL_INSENSITIVE, 
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
           ResultSet.CONCUR_READ_ONLY).executeQuery(
               "SELECT * FROM niveau WHERE ID = " + id);
       if (result.first()) {
@@ -88,5 +66,5 @@ public class NiveauDAO extends DAO<Niveau> {
     }
     return niv;
   }
-  
+
 }

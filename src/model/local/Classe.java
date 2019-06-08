@@ -12,10 +12,6 @@ import java.util.Set;
  * @author Jerome
  */
 public class Classe extends TableRow {
-  /**
-   * Classe ID
-   */
-  private int id;
 
   /**
    * name of classe
@@ -27,7 +23,7 @@ public class Classe extends TableRow {
   private Niveau niveau;
 
   public Classe(int id, String nom, AnneeScolaire anneeScolaire, Niveau niveau) {
-    this.id = id;
+    super(id);
     this.nom = nom;
     this.anneeScolaire = anneeScolaire;
     this.niveau = niveau;
@@ -36,10 +32,6 @@ public class Classe extends TableRow {
   @Override
   public String toString() {
     return "Classe{" + "id=" + id + ", nom=" + nom + ", anneeScolaire=" + anneeScolaire + ", niveau=" + niveau + '}';
-  }
-
-  public int getId() {
-    return id;
   }
 
   public String getNom() {

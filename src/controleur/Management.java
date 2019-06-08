@@ -5,6 +5,8 @@
  */
 package controleur;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
@@ -14,7 +16,15 @@ import model.DAO.DAOFactory;
 import model.TABLE;
 import model.local.AnneeScolaire;
 import model.local.Bulletin;
+import model.local.Classe;
+import model.local.DetailBulletin;
+import model.local.Discipline;
+import model.local.Eleve;
+import model.local.Enseignement;
+import model.local.Evaluation;
 import model.local.Inscription;
+import model.local.Niveau;
+import model.local.Professeur;
 import model.local.TableRow;
 import model.local.Trimestre;
 import vue.FieldPanel;
@@ -48,7 +58,7 @@ public class Management implements ManagementInterface {
     table.changeTable(new EcoleTableModel(datas));
     field.changeField(new EcoleFieldModel(datas));
   }
-  
+
   private void updateTable() {
     switchTable(type);
   }
@@ -78,159 +88,152 @@ public class Management implements ManagementInterface {
     field.fillField(row.getStringRowField());
   }
 
-  @Override
-  public void create() {
+  private TableRow rowFromField() throws NumberFormatException, SQLException, IllegalArgumentException {
     List<String> inputs = field.getText();
+    if (inputs.get(0).equals("") && type != TABLE.ANNEESCOLAIRE) {
+      inputs.set(0, "-1");
+    }
+    TableRow out = null;
     switch (type) {
       case TABLE.ANNEESCOLAIRE:
-        try {
-          AnneeScolaire tmp = new AnneeScolaire(Integer.parseInt(inputs.get(0)));
-          dao.create(tmp);
-          updateTable();
-        } catch(NumberFormatException ex) {
-          System.out.println(ex);
-          JOptionPane.showMessageDialog(new JFrame(), "Error in fields");
-        }
+        out = new AnneeScolaire(Integer.parseInt(inputs.get(0)));
         break;
       case TABLE.BULLETIN:
-        try {
-          Bulletin tmp = new Bulletin(Integer.parseInt(inputs.get(0)), 
-              inputs.get(1), 
-              (Trimestre) DAOFactory.getTrimestreDAO().find(Integer.parseInt(inputs.get(2))), 
-              (Inscription) DAOFactory.getInscriptionDAO().find(Integer.parseInt(inputs.get(3))));
-          dao.create(tmp);
-          updateTable();
-        } catch(NumberFormatException ex) {
-          System.out.println(ex);
-          JOptionPane.showMessageDialog(new JFrame(), "Error in fields");
-        }
+        out = new Bulletin(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            (Trimestre) DAOFactory.getTrimestreDAO().find(Integer.parseInt(inputs.get(2))),
+            (Inscription) DAOFactory.getInscriptionDAO().find(Integer.parseInt(inputs.get(3)))
+        );
         break;
       case TABLE.CLASSE:
+        out = new Classe(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            (AnneeScolaire) DAOFactory.getAnneeScolaireDAO().find(Integer.parseInt(inputs.get(2))),
+            (Niveau) DAOFactory.getNiveauDAO().find(Integer.parseInt(inputs.get(3)))
+        );
         break;
       case TABLE.DETAILBULLETIN:
+        out = new DetailBulletin(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            (Enseignement) DAOFactory.getEnseignementDAO().find(Integer.parseInt(inputs.get(2))),
+            (Bulletin) DAOFactory.getBulletinDAO().find(Integer.parseInt(inputs.get(3)))
+        );
         break;
       case TABLE.DISCIPLINE:
+        out = new Discipline(Integer.parseInt(inputs.get(0)),
+            inputs.get(1)
+        );
         break;
       case TABLE.ELEVE:
+        out = new Eleve(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            inputs.get(2)
+        );
         break;
       case TABLE.ENSEIGNEMENT:
+        out = new Enseignement(Integer.parseInt(inputs.get(0)),
+            (Classe) DAOFactory.getClasseDAO().find(Integer.parseInt(inputs.get(1))),
+            (Discipline) DAOFactory.getDisciplineDAO().find(Integer.parseInt(inputs.get(2))),
+            (Professeur) DAOFactory.getProfesseurDAO().find(Integer.parseInt(inputs.get(3)))
+        );
         break;
       case TABLE.EVALUATION:
+        out = new Evaluation(Integer.parseInt(inputs.get(0)),
+            Float.parseFloat(inputs.get(1)),
+            inputs.get(2),
+            (DetailBulletin) DAOFactory.getDetailBulletinDAO().find(Integer.parseInt(inputs.get(3)))
+        );
         break;
       case TABLE.INSCRIPTION:
+        out = new Inscription(Integer.parseInt(inputs.get(0)),
+            (Classe) DAOFactory.getClasseDAO().find(Integer.parseInt(inputs.get(1))),
+            (Eleve) DAOFactory.getEleveDAO().find(Integer.parseInt(inputs.get(2)))
+        );
         break;
       case TABLE.NIVEAU:
+        out = new Niveau(Integer.parseInt(inputs.get(0)),
+            inputs.get(2)
+        );
         break;
       case TABLE.PROFESSEUR:
+        out = new Professeur(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            inputs.get(2)
+        );
         break;
-      case TABLE.TRIMESTRE:
-        break;
+      case TABLE.TRIMESTRE: {
+        try {
+          out = new Trimestre(Integer.parseInt(inputs.get(0)),
+              (AnneeScolaire) DAOFactory.getAnneeScolaireDAO().find(Integer.parseInt(inputs.get(1))),
+              Integer.parseInt(inputs.get(2)),
+              inputs.get(3),
+              inputs.get(4)
+          );
+        } catch (ParseException ex) {
+          throw new NumberFormatException(ex.toString());
+        }
+      }
+      break;
       default:
         throw new RuntimeException("Internal error");
+    }
+    return out;
+  }
+
+  @Override
+  public void create() {
+    TableRow tmp;
+    try {
+      tmp = rowFromField();
+      dao.create(tmp);
+      updateTable();
+    } catch (NumberFormatException ex) {
+      System.out.println(ex);
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "Format error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
+    } catch (IllegalArgumentException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields : An ID doesn't exist", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
     }
   }
 
   @Override
   public void update() {
-    List<String> inputs = field.getText();
-    switch (type) {
-      case TABLE.ANNEESCOLAIRE:
-        try {
-          AnneeScolaire tmp = new AnneeScolaire(Integer.parseInt(inputs.get(0)));
-          dao.update(tmp);
-          updateTable();
-        } catch(NumberFormatException ex) {
-          System.out.println(ex);
-          JOptionPane.showMessageDialog(new JFrame(), "Error in fields");
-        }
-        break;
-      case TABLE.BULLETIN:
-        try {
-          Bulletin tmp = new Bulletin(Integer.parseInt(inputs.get(0)), 
-              inputs.get(1), 
-              (Trimestre) DAOFactory.getTrimestreDAO().find(Integer.parseInt(inputs.get(2))), 
-              (Inscription) DAOFactory.getInscriptionDAO().find(Integer.parseInt(inputs.get(3))));
-          dao.update(tmp);
-          updateTable();
-        } catch(NumberFormatException ex) {
-          System.out.println(ex);
-          JOptionPane.showMessageDialog(new JFrame(), "Error in fields");
-        }
-        break;
-      case TABLE.CLASSE:
-        break;
-      case TABLE.DETAILBULLETIN:
-        break;
-      case TABLE.DISCIPLINE:
-        break;
-      case TABLE.ELEVE:
-        break;
-      case TABLE.ENSEIGNEMENT:
-        break;
-      case TABLE.EVALUATION:
-        break;
-      case TABLE.INSCRIPTION:
-        break;
-      case TABLE.NIVEAU:
-        break;
-      case TABLE.PROFESSEUR:
-        break;
-      case TABLE.TRIMESTRE:
-        break;
-      default:
-        throw new RuntimeException("Internal error");
+    TableRow tmp;
+    try {
+      tmp = rowFromField();
+      dao.update(tmp);
+      updateTable();
+    } catch (NumberFormatException ex) {
+      System.out.println(ex);
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "Format error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
+    } catch (IllegalArgumentException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields : An ID doesn't exist", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
     }
   }
 
   @Override
   public void delete() {
-    List<String> inputs = field.getText();
-    switch (type) {
-      case TABLE.ANNEESCOLAIRE:
-        try {
-          AnneeScolaire tmp = new AnneeScolaire(Integer.parseInt(inputs.get(0)));
-          dao.delete(tmp);
-          updateTable();
-        } catch(NumberFormatException ex) {
-          System.out.println(ex);
-          JOptionPane.showMessageDialog(new JFrame(), "Error in fields");
-        }
-        break;
-      case TABLE.BULLETIN:
-        try {
-          Bulletin tmp = new Bulletin(Integer.parseInt(inputs.get(0)), 
-              inputs.get(1), 
-              (Trimestre) DAOFactory.getTrimestreDAO().find(Integer.parseInt(inputs.get(2))), 
-              (Inscription) DAOFactory.getInscriptionDAO().find(Integer.parseInt(inputs.get(3))));
-          dao.delete(tmp);
-          updateTable();
-        } catch(NumberFormatException ex) {
-          System.out.println(ex);
-          JOptionPane.showMessageDialog(new JFrame(), "Error in fields");
-        }
-        break;
-      case TABLE.CLASSE:
-        break;
-      case TABLE.DETAILBULLETIN:
-        break;
-      case TABLE.DISCIPLINE:
-        break;
-      case TABLE.ELEVE:
-        break;
-      case TABLE.ENSEIGNEMENT:
-        break;
-      case TABLE.EVALUATION:
-        break;
-      case TABLE.INSCRIPTION:
-        break;
-      case TABLE.NIVEAU:
-        break;
-      case TABLE.PROFESSEUR:
-        break;
-      case TABLE.TRIMESTRE:
-        break;
-      default:
-        throw new RuntimeException("Internal error");
+    TableRow tmp;
+    try {
+      tmp = rowFromField();
+      dao.delete(tmp);
+      updateTable();
+    } catch (NumberFormatException ex) {
+      System.out.println(ex);
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "Format error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
+    } catch (IllegalArgumentException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields : An ID doesn't exist", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
     }
   }
 

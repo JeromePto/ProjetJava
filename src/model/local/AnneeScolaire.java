@@ -11,22 +11,14 @@ import java.util.Set;
  * @author Jerome
  */
 public class AnneeScolaire extends TableRow{
-  /**
-   * AnneeScolaire ID
-   */
-  private int id;
 
   public AnneeScolaire(int id) {
-    this.id = id;
+    super(id);
   }
 
   @Override
   public String toString() {
     return "AnneeScolaire{" + "id=" + id + '}';
-  }
-
-  public int getId() {
-    return id;
   }
   
   public String readId(boolean printId) {

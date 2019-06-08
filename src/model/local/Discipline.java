@@ -11,10 +11,6 @@ import java.util.Set;
  * @author Jerome
  */
 public class Discipline extends TableRow{
-  /**
-   * Discipline ID
-   */
-  private int id;
 
   /**
    * Discipline name
@@ -22,12 +18,8 @@ public class Discipline extends TableRow{
   private String nom;
 
   public Discipline(int id, String nom) {
-    this.id = id;
+    super(id);
     this.nom = nom;
-  }
-
-  public int getId() {
-    return id;
   }
 
   public String getNom() {

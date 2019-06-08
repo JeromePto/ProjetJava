@@ -27,47 +27,25 @@ public class InscriptionDAO extends DAO<Inscription> {
   }
 
   @Override
-  public boolean create(Inscription obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "INSERT INTO inscription (CLASSE_ID, PERSONNE_ID) VALUES(?,?)");
-      statement.setObject(1, obj.getClasse().getId(), Types.INTEGER);
-      statement.setObject(2, obj.getEleve().getId(), Types.INTEGER);
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean create(Inscription obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO inscription (CLASSE_ID, PERSONNE_ID) VALUES(?,?)");
+    statement.setObject(1, obj.getClasse().getId(), Types.INTEGER);
+    statement.setObject(2, obj.getEleve().getId(), Types.INTEGER);
+    statement.executeUpdate();
     return true;
   }
 
   @Override
-  public boolean delete(Inscription obj) {
-    try {
-      this.connect.createStatement().executeUpdate(
-          "DELETE FROM inscription WHERE ID = " + obj.getId());
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public boolean update(Inscription obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "UPDATE inscription "
-              + "SET CLASSE_ID = ?, PERSONNE_ID = ? "
-              + "WHERE ID = ?");
-      statement.setInt(1, obj.getClasse().getId());
-      statement.setInt(2, obj.getEleve().getId());
-      statement.setInt(3, obj.getId());
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean update(Inscription obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE inscription "
+        + "SET CLASSE_ID = ?, PERSONNE_ID = ? "
+        + "WHERE ID = ?");
+    statement.setInt(1, obj.getClasse().getId());
+    statement.setInt(2, obj.getEleve().getId());
+    statement.setInt(3, obj.getId());
+    statement.executeUpdate();
     return true;
   }
 
@@ -76,14 +54,14 @@ public class InscriptionDAO extends DAO<Inscription> {
     Inscription inscri = null;
     try {
       ResultSet result = this.connect.createStatement(
-          ResultSet.TYPE_SCROLL_INSENSITIVE, 
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
           ResultSet.CONCUR_READ_ONLY).executeQuery(
               "SELECT * FROM inscription WHERE ID = " + id);
       if (result.first()) {
         DAO<Classe> classe = DAOFactory.getClasseDAO();
         DAO<Eleve> eleve = DAOFactory.getEleveDAO();
-        inscri = new Inscription(result.getInt("ID"), 
-            classe.find(result.getInt("CLASSE_ID")), 
+        inscri = new Inscription(result.getInt("ID"),
+            classe.find(result.getInt("CLASSE_ID")),
             eleve.find(result.getInt("PERSONNE_ID")));
       } else {
         throw new IllegalArgumentException("Missing element in Database");
@@ -93,5 +71,5 @@ public class InscriptionDAO extends DAO<Inscription> {
     }
     return inscri;
   }
-  
+
 }

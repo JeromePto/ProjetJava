@@ -27,49 +27,27 @@ public class BulletinDAO extends DAO<Bulletin> {
   }
 
   @Override
-  public boolean create(Bulletin obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "INSERT INTO bulletin (APPRECIATION, INSCRIPTION_ID, TRIMESTRE_ID) VALUES(?,?,?)");
-      statement.setObject(1, obj.getAppreciation(), Types.VARCHAR);
-      statement.setObject(2, obj.getInscription().getId(), Types.INTEGER);
-      statement.setObject(3, obj.getTrimestre().getId(), Types.INTEGER);
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean create(Bulletin obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO bulletin (APPRECIATION, INSCRIPTION_ID, TRIMESTRE_ID) VALUES(?,?,?)");
+    statement.setObject(1, obj.getAppreciation(), Types.VARCHAR);
+    statement.setObject(2, obj.getInscription().getId(), Types.INTEGER);
+    statement.setObject(3, obj.getTrimestre().getId(), Types.INTEGER);
+    statement.executeUpdate();
     return true;
   }
 
   @Override
-  public boolean delete(Bulletin obj) {
-    try {
-      this.connect.createStatement().executeUpdate(
-          "DELETE FROM bulletin WHERE ID = " + obj.getId());
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public boolean update(Bulletin obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "UPDATE bulletin "
-              + "SET APPRECIATION = ?, INSCRIPTION_ID = ?, TRIMESTRE_ID = ? "
-              + "WHERE ID = ?");
-      statement.setString(1, obj.getAppreciation());
-      statement.setInt(2, obj.getInscription().getId());
-      statement.setInt(3, obj.getTrimestre().getId());
-      statement.setInt(4, obj.getId());
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean update(Bulletin obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE bulletin "
+        + "SET APPRECIATION = ?, INSCRIPTION_ID = ?, TRIMESTRE_ID = ? "
+        + "WHERE ID = ?");
+    statement.setString(1, obj.getAppreciation());
+    statement.setInt(2, obj.getInscription().getId());
+    statement.setInt(3, obj.getTrimestre().getId());
+    statement.setInt(4, obj.getId());
+    statement.executeUpdate();
     return true;
   }
 
@@ -78,14 +56,14 @@ public class BulletinDAO extends DAO<Bulletin> {
     Bulletin bul = null;
     try {
       ResultSet result = this.connect.createStatement(
-          ResultSet.TYPE_SCROLL_INSENSITIVE, 
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
           ResultSet.CONCUR_READ_ONLY).executeQuery(
               "SELECT * FROM bulletin WHERE ID = " + id);
       if (result.first()) {
         DAO<Trimestre> trimestre = DAOFactory.getTrimestreDAO();
         DAO<Inscription> inscription = DAOFactory.getInscriptionDAO();
-        bul = new Bulletin(result.getInt("ID"), result.getString("APPRECIATION"), 
-            trimestre.find(result.getInt("TRIMESTRE_ID")), 
+        bul = new Bulletin(result.getInt("ID"), result.getString("APPRECIATION"),
+            trimestre.find(result.getInt("TRIMESTRE_ID")),
             inscription.find(result.getInt("INSCRIPTION_ID")));
       } else {
         throw new IllegalArgumentException("Missing element in Database");
@@ -95,5 +73,5 @@ public class BulletinDAO extends DAO<Bulletin> {
     }
     return bul;
   }
-  
+
 }

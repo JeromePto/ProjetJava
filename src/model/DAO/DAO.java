@@ -21,7 +21,7 @@ import model.local.TableRow;
  * @see https://openclassrooms.com/fr/courses/26832-apprenez-a-programmer-en-java/26830-liez-vos-tables-avec-des-objets-java-le-pattern-dao
  * @author Jerome
  */
-public abstract class DAO<T> {
+public abstract class DAO<T extends TableRow> {
   /**
    * Connection state
    */
@@ -43,28 +43,32 @@ public abstract class DAO<T> {
    * @param obj object to create
    * @return success
    */
-  public abstract boolean create(T obj);
+  public abstract boolean create(T obj) throws SQLException;
   
   /**
    * delete object in database
    * @param obj object to delete
    * @return success
    */
-  public abstract boolean delete(T obj);
+  public boolean delete(T obj) throws SQLException {
+    this.connect.createStatement().executeUpdate(
+          "DELETE FROM " + table + " WHERE ID = " + obj.getId());
+    return true;
+  }
   
   /**
    * update object in database
    * @param obj object to update
    * @return success
    */
-  public abstract boolean update(T obj);
+  public abstract boolean update(T obj) throws SQLException;
   
   /**
    * find object in DB
    * @param id id of object in DB
    * @return the object
    */
-  public abstract T find(int id) throws IllegalArgumentException;
+  public abstract <T> T find(int id) throws IllegalArgumentException;
   
   public Map<Integer, TableRow> findAll() {
     Map<Integer, TableRow> out = new HashMap<>();    
@@ -74,7 +78,7 @@ public abstract class DAO<T> {
           ResultSet.CONCUR_READ_ONLY).executeQuery(
               "SELECT * FROM " + table + " WHERE 1");
       while(result.next()) {
-        out.put(result.getInt("ID"), (TableRow) this.find(result.getInt("ID")));
+        out.put(result.getInt("ID"), this.find(result.getInt("ID")));
       }
     } catch (SQLException ex) {
       Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);

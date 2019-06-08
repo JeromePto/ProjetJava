@@ -26,49 +26,27 @@ public class EvaluationDAO extends DAO<Evaluation> {
   }
 
   @Override
-  public boolean create(Evaluation obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "INSERT INTO evaluation (NOTE, APPRECIATION, DETAILBULLETIN_ID) VALUES(?,?,?)");
-      statement.setObject(1, obj.getNote(), Types.FLOAT);
-      statement.setObject(2, obj.getAppreciation(), Types.VARCHAR);
-      statement.setObject(3, obj.getDetailBulletin().getId(), Types.INTEGER);
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean create(Evaluation obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO evaluation (NOTE, APPRECIATION, DETAILBULLETIN_ID) VALUES(?,?,?)");
+    statement.setObject(1, obj.getNote(), Types.FLOAT);
+    statement.setObject(2, obj.getAppreciation(), Types.VARCHAR);
+    statement.setObject(3, obj.getDetailBulletin().getId(), Types.INTEGER);
+    statement.executeUpdate();
     return true;
   }
 
   @Override
-  public boolean delete(Evaluation obj) {
-    try {
-      this.connect.createStatement().executeUpdate(
-          "DELETE FROM evaluation WHERE ID = " + obj.getId());
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public boolean update(Evaluation obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "UPDATE evaluation "
-              + "SET NOTE = ?, APPRECIATION = ?, DETAILBULLETIN_ID = ? "
-              + "WHERE ID = ?");
-      statement.setFloat(1, obj.getNote());
-      statement.setString(2, obj.getAppreciation());
-      statement.setInt(3, obj.getDetailBulletin().getId());
-      statement.setInt(4, obj.getId());
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean update(Evaluation obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE evaluation "
+        + "SET NOTE = ?, APPRECIATION = ?, DETAILBULLETIN_ID = ? "
+        + "WHERE ID = ?");
+    statement.setFloat(1, obj.getNote());
+    statement.setString(2, obj.getAppreciation());
+    statement.setInt(3, obj.getDetailBulletin().getId());
+    statement.setInt(4, obj.getId());
+    statement.executeUpdate();
     return true;
   }
 

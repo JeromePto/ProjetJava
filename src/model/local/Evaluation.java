@@ -11,10 +11,6 @@ import java.util.Set;
  * @author Jerome
  */
 public class Evaluation extends TableRow{
-  /**
-   * Evaluation ID
-   */
-  private int id;
 
   /**
    * Evaluation mark
@@ -28,11 +24,8 @@ public class Evaluation extends TableRow{
 
   private DetailBulletin detailBulletin;
 
-  public Evaluation() {
-  }
-
   public Evaluation(int id, float note, String appreciation, DetailBulletin detailBulletin) {
-    this.id = id;
+    super(id);
     this.note = note;
     this.appreciation = appreciation;
     this.detailBulletin = detailBulletin;
@@ -40,10 +33,6 @@ public class Evaluation extends TableRow{
   
   public float getNote() {
     return note;
-  }
-
-  public int getId() {
-    return id;
   }
 
   public String getAppreciation() {

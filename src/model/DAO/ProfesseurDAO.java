@@ -28,47 +28,32 @@ public class ProfesseurDAO extends DAO<Professeur> {
   }
 
   @Override
-  public boolean create(Professeur obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "INSERT INTO personne (NOM, PRENOM, TYPE) VALUES(?,?,2)");
-      statement.setObject(1, obj.getNom(), Types.VARCHAR);
-      statement.setObject(2, obj.getPrenom(), Types.VARCHAR);
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean create(Professeur obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO personne (NOM, PRENOM, TYPE) VALUES(?,?,2)");
+    statement.setObject(1, obj.getNom(), Types.VARCHAR);
+    statement.setObject(2, obj.getPrenom(), Types.VARCHAR);
+    statement.executeUpdate();
     return true;
   }
 
   @Override
-  public boolean delete(Professeur obj) {
-    try {
-      this.connect.createStatement().executeUpdate(
-          "DELETE FROM personne WHERE TYPE = 2 AND ID = " + obj.getId());
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean delete(Professeur obj) throws SQLException {
+    this.connect.createStatement().executeUpdate(
+        "DELETE FROM personne WHERE TYPE = 2 AND ID = " + obj.getId());
     return true;
   }
 
   @Override
-  public boolean update(Professeur obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "UPDATE personne "
-              + "SET NOM = ?, PRENOM = ? "
-              + "WHERE TYPE = 2 AND ID = ?");
-      statement.setString(1, obj.getNom());
-      statement.setString(2, obj.getPrenom());
-      statement.setInt(3, obj.getId());
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean update(Professeur obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE personne "
+        + "SET NOM = ?, PRENOM = ? "
+        + "WHERE TYPE = 2 AND ID = ?");
+    statement.setString(1, obj.getNom());
+    statement.setString(2, obj.getPrenom());
+    statement.setInt(3, obj.getId());
+    statement.executeUpdate();
     return true;
   }
 
@@ -77,12 +62,12 @@ public class ProfesseurDAO extends DAO<Professeur> {
     Professeur prof = null;
     try {
       ResultSet result = this.connect.createStatement(
-          ResultSet.TYPE_SCROLL_INSENSITIVE, 
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
           ResultSet.CONCUR_READ_ONLY).executeQuery(
               "SELECT * FROM personne WHERE TYPE = 2 AND ID = " + id);
       if (result.first()) {
-        prof = new Professeur(result.getInt("ID"), 
-            result.getString("NOM"), 
+        prof = new Professeur(result.getInt("ID"),
+            result.getString("NOM"),
             result.getString("PRENOM"));
       } else {
         throw new IllegalArgumentException("Missing element in Database");
@@ -92,16 +77,16 @@ public class ProfesseurDAO extends DAO<Professeur> {
     }
     return prof;
   }
-  
+
   @Override
   public Map<Integer, TableRow> findAll() {
-    Map<Integer, TableRow> out = new HashMap<>();    
+    Map<Integer, TableRow> out = new HashMap<>();
     try {
       ResultSet result = this.connect.createStatement(
           ResultSet.TYPE_SCROLL_INSENSITIVE,
           ResultSet.CONCUR_READ_ONLY).executeQuery(
               "SELECT * FROM " + table + " WHERE TYPE = 2");
-      while(result.next()) {
+      while (result.next()) {
         out.put(result.getInt("ID"), (TableRow) this.find(result.getInt("ID")));
       }
     } catch (SQLException ex) {
@@ -109,5 +94,5 @@ public class ProfesseurDAO extends DAO<Professeur> {
     }
     return out;
   }
-  
+
 }

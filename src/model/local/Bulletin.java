@@ -17,10 +17,6 @@ import model.EcoleConnection;
  */
 public class Bulletin extends TableRow {
 
-  /**
-   * Bulletin ID
-   */
-  private int id;
 
   /**
    * Bulletin appreciation
@@ -34,7 +30,7 @@ public class Bulletin extends TableRow {
   private float average;
 
   public Bulletin(int id, String appreciation, Trimestre trimestre, Inscription inscription) {
-    this.id = id;
+    super(id);
     this.appreciation = appreciation;
     this.trimestre = trimestre;
     this.inscription = inscription;
@@ -80,10 +76,6 @@ public class Bulletin extends TableRow {
       computeAverage(EcoleConnection.getInstance());
     }
     return average == -1 ? "No average" : String.valueOf(average);
-  }
-
-  public int getId() {
-    return id;
   }
 
   public String getAppreciation() {

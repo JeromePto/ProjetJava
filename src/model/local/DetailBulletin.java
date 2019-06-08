@@ -17,10 +17,6 @@ import model.EcoleConnection;
  * @author Jerome
  */
 public class DetailBulletin extends TableRow{
-  /**
-   * DetailBulletin ID
-   */
-  private int id;
 
   /**
    * DetailBulletin appreciation
@@ -35,7 +31,7 @@ public class DetailBulletin extends TableRow{
 
 
   public DetailBulletin(int id, String appreciation, Enseignement enseignement, Bulletin bulletin) {
-    this.id = id;
+    super(id);
     this.appreciation = appreciation;
     this.enseignement = enseignement;
     this.bulletin = bulletin;
@@ -67,10 +63,6 @@ public class DetailBulletin extends TableRow{
     if (average == -1)
       computeAverage(EcoleConnection.getInstance());
     return average == -1 ? "No average" : String.valueOf(average);
-  }
-
-  public int getId() {
-    return id;
   }
 
   public String getAppreciation() {
@@ -121,8 +113,8 @@ public class DetailBulletin extends TableRow{
     List<String> out = new ArrayList<>();
     out.add("ID");
     out.add("Apperciation");
-    out.add("Trimestre");
-    out.add("Inscription");
+    out.add("Enseignement");
+    out.add("Bulletin");
     out.add("Moyenne");
     return out;
   }

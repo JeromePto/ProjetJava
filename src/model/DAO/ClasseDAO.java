@@ -27,40 +27,23 @@ public class ClasseDAO extends DAO<Classe> {
   }
 
   @Override
-  public boolean create(Classe obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "INSERT INTO evaluation (NOM, NIVEAU_ID, ANNEESCOLAIRE_ID) VALUES(?,?,?)");
-      statement.setObject(1, obj.getNom(), Types.VARCHAR);
-      statement.setObject(2, obj.getNiveau().getId(), Types.INTEGER);
-      statement.setObject(3, obj.getAnneeScolaire().getId(), Types.INTEGER);
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean create(Classe obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO evaluation (NOM, NIVEAU_ID, ANNEESCOLAIRE_ID) VALUES(?,?,?)");
+    statement.setObject(1, obj.getNom(), Types.VARCHAR);
+    statement.setObject(2, obj.getNiveau().getId(), Types.INTEGER);
+    statement.setObject(3, obj.getAnneeScolaire().getId(), Types.INTEGER);
+    statement.executeUpdate();
     return true;
   }
 
   @Override
-  public boolean delete(Classe obj) {
-    try {
-      this.connect.createStatement().executeUpdate(
-          "DELETE FROM classe WHERE ID = " + obj.getId());
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public boolean update(Classe obj) {
+  public boolean update(Classe obj) throws SQLException {
     try {
       PreparedStatement statement = this.connect.prepareStatement(
           "UPDATE classe "
-              + "SET NOM = ?, NIVEAU_ID = ?, ANNEESCOLAIRE_ID = ? "
-              + "WHERE ID = ?");
+          + "SET NOM = ?, NIVEAU_ID = ?, ANNEESCOLAIRE_ID = ? "
+          + "WHERE ID = ?");
       statement.setString(1, obj.getNom());
       statement.setInt(2, obj.getNiveau().getId());
       statement.setInt(3, obj.getAnneeScolaire().getId());
@@ -85,7 +68,7 @@ public class ClasseDAO extends DAO<Classe> {
         DAO<AnneeScolaire> anneeScolaire = DAOFactory.getAnneeScolaireDAO();
         DAO<Niveau> niveau = DAOFactory.getNiveauDAO();
         classe = new Classe(result.getInt("ID"), result.getString("NOM"),
-            anneeScolaire.find(result.getInt("ANNEESCOLAIRE_ID")), 
+            anneeScolaire.find(result.getInt("ANNEESCOLAIRE_ID")),
             niveau.find(result.getInt("NIVEAU_ID")));
       } else {
         throw new IllegalArgumentException("Missing element in Database");

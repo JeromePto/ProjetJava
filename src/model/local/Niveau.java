@@ -11,23 +11,12 @@ import java.util.Set;
  * @author Jerome
  */
 public class Niveau extends TableRow{
-  /**
-   * Niveau ID
-   */
-  private int id;
   
   private String nom;
 
-  public Niveau() {
-  }
-
   public Niveau(int id, String nom) {
-    this.id = id;
+    super(id);
     this.nom = nom;
-  }
-
-  public int getId() {
-    return id;
   }
 
   public String getNom() {

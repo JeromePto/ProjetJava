@@ -1,6 +1,9 @@
 package model.local;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedHashSet;
@@ -12,11 +15,6 @@ import java.util.Set;
  * @author Jerome
  */
 public class Trimestre extends TableRow {
-
-  /**
-   * Trimestre ID
-   */
-  private int id;
 
   private AnneeScolaire anneeScolaire;
 
@@ -35,7 +33,7 @@ public class Trimestre extends TableRow {
   private Calendar fin;
 
   public Trimestre(int id, AnneeScolaire anneeScolaire, int numero, Calendar debut, Calendar fin) {
-    this.id = id;
+    super(id);
     this.anneeScolaire = anneeScolaire;
     this.numero = numero;
     this.debut = debut;
@@ -43,7 +41,7 @@ public class Trimestre extends TableRow {
   }
 
   public Trimestre(int id, AnneeScolaire anneeScolaire, int numero, Date debut, Date fin) {
-    this.id = id;
+    super(id);
     this.anneeScolaire = anneeScolaire;
     this.numero = numero;
     this.debut = Calendar.getInstance();
@@ -52,8 +50,17 @@ public class Trimestre extends TableRow {
     this.fin.setTime(fin);
   }
 
-  public int getId() {
-    return id;
+  public Trimestre(int id, AnneeScolaire anneeScolaire, int numero, String debut, String fin) throws ParseException {
+    super(id);
+    this.anneeScolaire = anneeScolaire;
+    this.numero = numero;
+    DateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+    date.parse(debut);
+    this.debut = Calendar.getInstance();
+    this.debut.setTime(date.getCalendar().getTime());
+    date.parse(fin);
+    this.fin = Calendar.getInstance();
+    this.fin.setTime(date.getCalendar().getTime());
   }
 
   public AnneeScolaire getAnneeScolaire() {
@@ -86,8 +93,10 @@ public class Trimestre extends TableRow {
     out.addAll(anneeScolaire.getInfo());
     return out;
   }
-  private static String simpleDate(Calendar tmp) {
-    return tmp.get(Calendar.DAY_OF_MONTH) + "/" + tmp.get(Calendar.MONTH) + "/" + tmp.get(Calendar.YEAR);
+  
+  public static String simpleDate(Calendar tmp) {
+    DateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+    return date.format(tmp.getTime());
   }
 
   @Override
@@ -99,10 +108,10 @@ public class Trimestre extends TableRow {
   public List<String> getStringRow() {
     List<String> out = new ArrayList<>();
     out.add(String.valueOf(id));
+    out.add(anneeScolaire.readId(true));
     out.add(String.valueOf(numero));
     out.add(simpleDate(debut));
     out.add(simpleDate(fin));
-    out.add(anneeScolaire.readId(true));
     return out;
   }
 
@@ -110,10 +119,10 @@ public class Trimestre extends TableRow {
   public List<String> getColumnName() {
     List<String> out = new ArrayList<>();
     out.add("ID");
+    out.add("Année scolaire");
     out.add("Numero");
     out.add("Debut");
     out.add("Fin");
-    out.add("Année scolaire");
     return out;
   }
 
@@ -121,10 +130,10 @@ public class Trimestre extends TableRow {
   public List<String> getStringRowField() {
     List<String> out = new ArrayList<>();
     out.add(String.valueOf(id));
+    out.add(String.valueOf(anneeScolaire.getId()));
     out.add(String.valueOf(numero));
     out.add(simpleDate(debut));
     out.add(simpleDate(fin));
-    out.add(String.valueOf(anneeScolaire.getId()));
     return out;
   }
 }

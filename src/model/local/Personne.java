@@ -12,11 +12,6 @@ import java.util.Set;
 public abstract class Personne extends TableRow {
 
   /**
-   * Peronne ID
-   */
-  protected int id;
-
-  /**
    * Personne Name
    */
   protected String nom;
@@ -27,7 +22,7 @@ public abstract class Personne extends TableRow {
   protected String prenom;
 
   public Personne(int id, String nom, String prenom) {
-    this.id = id;
+    super(id);
     this.nom = nom;
     this.prenom = prenom;
   }
@@ -42,10 +37,6 @@ public abstract class Personne extends TableRow {
   @Override
   public String toString() {
     return "Personne{" + "id=" + id + ", nom=" + nom + ", Prenom=" + prenom + '}';
-  }
-
-  public int getId() {
-    return id;
   }
 
   public String getNom() {

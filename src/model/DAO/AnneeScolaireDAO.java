@@ -25,33 +25,16 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire> {
   }
 
   @Override
-  public boolean create(AnneeScolaire obj) {
-    try {
-      PreparedStatement statement = this.connect.prepareStatement(
-          "INSERT INTO anneescolaire (ID) VALUES(?)");
-      statement.setObject(1, obj.getId(), Types.INTEGER);
-      statement.executeUpdate();
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
+  public boolean create(AnneeScolaire obj) throws SQLException {
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO anneescolaire (ID) VALUES(?)");
+    statement.setObject(1, obj.getId(), Types.INTEGER);
+    statement.executeUpdate();
     return true;
   }
 
   @Override
-  public boolean delete(AnneeScolaire obj) {
-    try {
-      this.connect.createStatement().executeUpdate(
-          "DELETE FROM anneescolaire WHERE ID = " + obj.getId());
-    } catch (SQLException ex) {
-      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public boolean update(AnneeScolaire obj) {
+  public boolean update(AnneeScolaire obj) throws SQLException {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 
@@ -60,7 +43,7 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire> {
     AnneeScolaire annee = null;
     try {
       ResultSet result = this.connect.createStatement(
-          ResultSet.TYPE_SCROLL_INSENSITIVE, 
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
           ResultSet.CONCUR_READ_ONLY).executeQuery(
               "SELECT * FROM anneescolaire WHERE ID = " + id);
       if (result.first()) {
@@ -73,5 +56,5 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire> {
     }
     return annee;
   }
-  
+
 }

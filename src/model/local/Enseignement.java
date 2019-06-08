@@ -11,23 +11,12 @@ import java.util.Set;
  * @author Jerome
  */
 public class Enseignement extends TableRow{
-  /**
-   * Enseignement ID
-   */
-  private int id;
 
   private Classe classe;
 
   private Discipline discipline;
 
   private Professeur professeur;
-
-  public Enseignement() {
-  }
-
-  public int getId() {
-    return id;
-  }
 
   public Classe getClasse() {
     return classe;
@@ -42,7 +31,7 @@ public class Enseignement extends TableRow{
   }
 
   public Enseignement(int id, Classe classe, Discipline discipline, Professeur professeur) {
-    this.id = id;
+    super(id);
     this.classe = classe;
     this.discipline = discipline;
     this.professeur = professeur;

@@ -11,26 +11,15 @@ import java.util.Set;
  * @author Jerome
  */
 public class Inscription extends TableRow{
-  /**
-   * Inscription ID
-   */
-  private int id;
 
   private Classe classe;
 
   private Eleve eleve;
 
-  public Inscription() {
-  }
-
   public Inscription(int id, Classe classe, Eleve eleve) {
-    this.id = id;
+    super(id);
     this.classe = classe;
     this.eleve = eleve;
-  }
-
-  public int getId() {
-    return id;
   }
 
   public Classe getClasse() {

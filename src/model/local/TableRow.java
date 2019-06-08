@@ -12,7 +12,18 @@ import java.util.List;
  * @author Jerome
  */
 public abstract class TableRow {
+  
+  protected int id;
+
+  public TableRow(int id) {
+    this.id = id;
+  }
+  
   public abstract List<String> getStringRow();
   public abstract List<String> getColumnName();
   public abstract List<String> getStringRowField();
+  
+  public int getId() {
+    return id;
+  }
 }

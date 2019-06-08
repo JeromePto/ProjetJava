@@ -24,18 +24,18 @@ import model.TABLE;
  *
  * @author Jerome
  */
-public class MainFrame extends JFrame implements ActionListener{
+public class MainFrame extends JFrame implements ActionListener {
 
   private JPanel bottomPanel;
   private JPanel buttonPanel;
   private JButton createButton;
-  private JButton deletebutton;
+  private JButton deleteButton;
   private JPanel fieldPanel;
   private List<JButton> tableChange;
   private JPanel tableChoicePanel;
   private JPanel tablePanel;
   private JPanel topPanel;
-  private JButton updatebutton;
+  private JButton updateButton;
   private ManagementInterface management;
 
   public MainFrame(ManagementInterface management) {
@@ -49,8 +49,8 @@ public class MainFrame extends JFrame implements ActionListener{
     topPanel = new JPanel();
     buttonPanel = new JPanel();
     createButton = new JButton();
-    updatebutton = new JButton();
-    deletebutton = new JButton();
+    updateButton = new JButton();
+    deleteButton = new JButton();
 
     topPanel.setLayout(new BorderLayout());
     topPanel.add(fieldPanel, BorderLayout.CENTER);
@@ -58,13 +58,16 @@ public class MainFrame extends JFrame implements ActionListener{
     buttonPanel.setLayout(new GridLayout());
 
     createButton.setText("Créer");
+    createButton.addActionListener(this);
     buttonPanel.add(createButton);
 
-    updatebutton.setText("Modifier");
-    buttonPanel.add(updatebutton);
+    updateButton.setText("Modifier");
+    updateButton.addActionListener(this);
+    buttonPanel.add(updateButton);
 
-    deletebutton.setText("Supprimer");
-    buttonPanel.add(deletebutton);
+    deleteButton.setText("Supprimer");
+    deleteButton.addActionListener(this);
+    buttonPanel.add(deleteButton);
 
     topPanel.add(buttonPanel, BorderLayout.EAST);
 
@@ -103,13 +106,19 @@ public class MainFrame extends JFrame implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     if (e.getSource().getClass() == JButton.class) {
       JButton tmp = (JButton) e.getSource();
-      for (int i = 0 ; i < 12 ; i++) {
+      for (int i = 0; i < 12; i++) {
         if (tmp == tableChange.get(i)) {
           management.switchTable(i);
         }
       }
+      if (tmp == createButton) {
+        management.create();
+      } else if (tmp == updateButton) {
+        management.update();
+      } else if (tmp == deleteButton) {
+        management.delete();
+      }
     }
   }
-  
-  
+
 }

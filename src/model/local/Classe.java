@@ -88,4 +88,14 @@ public class Classe extends TableRow {
     out.add("Niveau");
     return out;
   }
+
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    out.add(String.valueOf(anneeScolaire.getId()));
+    out.add(String.valueOf(niveau.getId()));
+    return out;
+  }
 }

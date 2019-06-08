@@ -5,11 +5,16 @@
  */
 package vue;
 
-import java.awt.Dimension;
+import controleur.Management;
+import controleur.ManagementInterface;
 import java.awt.GridLayout;
+import java.util.EventListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 
 /**
@@ -20,25 +25,37 @@ public class MainTable extends JPanel{
 
   private JTable table;
   private JScrollPane scrollPane;
+  private ManagementInterface management;
   
-  public MainTable(TableModel model) {
+  public MainTable(TableModel model, ManagementInterface management) {
     super(new GridLayout(1,0));
-    table = new JTable(model);
-    //table.setAutoCreateRowSorter(true);
-    //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-    table.setFillsViewportHeight(true);
+    this.management = management;
+    createTable(model);
     scrollPane = new JScrollPane(table);
     add(scrollPane);
   }
   
   public void changeTable(TableModel model) {
     remove(scrollPane);
-    table = new JTable(model);
-    //table.setAutoCreateRowSorter(true);
-    //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-    table.setFillsViewportHeight(true);
+    createTable(model);
     scrollPane = new JScrollPane(table);
     add(scrollPane);
     validate();
  }
+  
+  private void createTable(TableModel model) {
+    table = new JTable(model);
+    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting() == false) {
+          management.selectRow(table.getSelectedRow());
+        }
+      }
+    });
+    //table.setAutoCreateRowSorter(true);
+    //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+    table.setFillsViewportHeight(true);
+  }
 }

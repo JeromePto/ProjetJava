@@ -28,7 +28,8 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire> {
   public boolean create(AnneeScolaire obj) {
     try {
       PreparedStatement statement = this.connect.prepareStatement(
-          "INSERT INTO anneescolaire (NOTE) VALUES(NULL)");
+          "INSERT INTO anneescolaire (ID) VALUES(?)");
+      statement.setObject(1, obj.getId(), Types.INTEGER);
       statement.executeUpdate();
     } catch (SQLException ex) {
       Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);

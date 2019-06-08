@@ -14,4 +14,5 @@ import java.util.List;
 public abstract class TableRow {
   public abstract List<String> getStringRow();
   public abstract List<String> getColumnName();
+  public abstract List<String> getStringRowField();
 }

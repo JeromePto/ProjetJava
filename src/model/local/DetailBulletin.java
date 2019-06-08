@@ -127,5 +127,16 @@ public class DetailBulletin extends TableRow{
     return out;
   }
 
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(appreciation);
+    out.add(String.valueOf(enseignement.getId()));
+    out.add(String.valueOf(bulletin.getId()));
+    out.add(getStringAverage());
+    return out;
+  }
+
   
 }

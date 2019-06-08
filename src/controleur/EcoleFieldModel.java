@@ -33,7 +33,7 @@ public class EcoleFieldModel {
       disable = new ArrayList<>();
       for (int i = 0 ; i < fieldNames.size() ; i++) {
         
-        if (fieldNames.get(i) == "ID" || fieldNames.get(i) == "Moyenne") {
+        if ((fieldNames.get(i) == "ID" || fieldNames.get(i) == "Moyenne")&&fieldNames.size()>1) {
           disable.add(true);
         } else {
           disable.add(false);

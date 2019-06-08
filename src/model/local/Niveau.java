@@ -68,4 +68,12 @@ public class Niveau extends TableRow{
     out.add("Nom");
     return out;
   }
+
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    return out;
+  }
 }

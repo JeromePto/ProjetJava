@@ -16,4 +16,8 @@ public interface ManagementInterface {
   public MainTable getTable();
   public FieldPanel getField();
   public void switchTable(int tableId);
+  public void selectRow(int row);
+  public void create();
+  public void update();
+  public void delete();
 }

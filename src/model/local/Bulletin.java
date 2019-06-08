@@ -135,4 +135,15 @@ public class Bulletin extends TableRow {
     return out;
   }
 
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(appreciation);
+    out.add(String.valueOf(trimestre.getId()));
+    out.add(String.valueOf(inscription.getId()));
+    out.add(getStringAverage());
+    return out;
+  }
+
 }

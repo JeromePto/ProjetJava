@@ -87,4 +87,13 @@ public abstract class Personne extends TableRow {
     out.add("Prenom");
     return out;
   }
+  
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    out.add(prenom);
+    return out;
+  }
 }

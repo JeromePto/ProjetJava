@@ -79,7 +79,7 @@ public class Project2v2 {
     Management management = new Management();
     MainFrame mainFrame = new MainFrame(management);
     mainFrame.setVisible(true);
-    management.switchTable(TABLE.EVALUATION);
+    //management.switchTable(TABLE.EVALUATION);
   }
   
 }

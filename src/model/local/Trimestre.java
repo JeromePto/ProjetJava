@@ -116,4 +116,15 @@ public class Trimestre extends TableRow {
     out.add("Année scolaire");
     return out;
   }
+
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(String.valueOf(numero));
+    out.add(simpleDate(debut));
+    out.add(simpleDate(fin));
+    out.add(String.valueOf(anneeScolaire.getId()));
+    return out;
+  }
 }

@@ -93,4 +93,14 @@ public class Evaluation extends TableRow{
     out.add("Detail Bulletin");
     return out;
   }
+
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(String.valueOf(note));
+    out.add(appreciation);
+    out.add(String.valueOf(detailBulletin.getId()));
+    return out;
+  }
 }

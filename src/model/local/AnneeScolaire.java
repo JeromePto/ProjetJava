@@ -57,4 +57,11 @@ public class AnneeScolaire extends TableRow{
     return out;
   }
 
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    return out;
+  }
+
 }

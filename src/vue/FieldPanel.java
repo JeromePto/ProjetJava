@@ -71,4 +71,20 @@ public class FieldPanel extends JPanel{
     validate();
   }
   
+  public void fillField(List<String> values) {
+    if (values.size() != fields.size()) {
+      throw new RuntimeException("Internal error 3");
+    }
+    for(int i = 0 ; i < values.size() ; i++) {
+      fields.get(i).setText(values.get(i));
+    }    
+  }
+  
+  public List<String> getText() {
+    List<String> out = new ArrayList<>();
+    for(JTextField it : fields) {
+      out.add(it.getText());
+    }
+    return out;
+  }
 }

@@ -69,5 +69,13 @@ public class Discipline extends TableRow{
     return out;
   }
 
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    return out;
+  }
+
   
 }

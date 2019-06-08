@@ -78,4 +78,13 @@ public class Inscription extends TableRow{
     out.add("Eleve");
     return out;
   }
+
+  @Override
+  public List<String> getStringRowField() {
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(String.valueOf(classe.getId()));
+    out.add(String.valueOf(eleve.getId()));
+    return out;
+  }
 }

@@ -33,7 +33,7 @@ public class ReportingFrame extends JFrame {
    * @param management effectue les actions associés aux tables/boutons
    */
   public ReportingFrame(ManagementInterface management) {
-    super();
+    super("Reporting");
     this.management = management;
     labels = new ArrayList<>();
     bars = new ArrayList<>();

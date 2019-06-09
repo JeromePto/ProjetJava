@@ -36,7 +36,7 @@ public class MainFrame extends JFrame implements ActionListener {
  * @param management cette fonction va recuperer les données contenues dans chaque tableau 
  */
   public MainFrame(ManagementInterface management) {
-    super();
+    super("Ecole");
     this.management = management;
     this.tablePanel = management.getTable();
     this.fieldPanel = management.getField();

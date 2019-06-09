@@ -30,7 +30,7 @@ public class TABLE {
    */
   public final static String name(int id) {
     switch (id) {
-      case TABLE.ANNEESCOLAIRE: //Modifie les 
+      case TABLE.ANNEESCOLAIRE: 
         return "Année scolaire";
       case TABLE.BULLETIN:
         return "Bulletin";

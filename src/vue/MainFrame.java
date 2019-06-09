@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vue;
 
 import controleur.Management;
@@ -21,8 +16,8 @@ import javax.swing.JPanel;
 import model.TABLE;
 
 /**
- *
- * @author Jerome
+ * Classe qui contient tous les composants graphiques 
+ * Creer une fenetre JFrame principale et lui associe des JPanels/JButtons 
  */
 public class MainFrame extends JFrame implements ActionListener {
 
@@ -37,7 +32,10 @@ public class MainFrame extends JFrame implements ActionListener {
   private JPanel topPanel;
   private JButton updateButton;
   private ManagementInterface management;
-
+/**
+ * Methode qui lie les données des tableaux et des champs (contenus dans la classe "management") à l'interface graphique 
+ * @param management cette fonction va recuperer les données contenues dans chaque tableau 
+ */
   public MainFrame(ManagementInterface management) {
     super();
     this.management = management;
@@ -45,8 +43,15 @@ public class MainFrame extends JFrame implements ActionListener {
     this.fieldPanel = management.getField();
     initComponents();
   }
-
+/**
+ * Jpanel contenant les boutons de creation, suppression, et modification de tableaux situé en haut de la fenetre
+ * La methode va separer le JPanel du haut en deux afin d'ajouter le Jpanel dedié aux champs de saisie
+ * Va creer les 3 boutons et les afficher
+ */
   private void makeTopPanel() {
+      /**
+       * Initialisation des Jpanels pour chaque bouton  
+       */
     topPanel = new JPanel();
     buttonPanel = new JPanel();
     createButton = new JButton();
@@ -54,18 +59,18 @@ public class MainFrame extends JFrame implements ActionListener {
     deleteButton = new JButton();
 
     topPanel.setLayout(new BorderLayout());
-    topPanel.add(fieldPanel, BorderLayout.CENTER);
+    topPanel.add(fieldPanel, BorderLayout.CENTER); //pour diviser le topPanel en 2 parties et ajouter le fieldPanel qui gere les champs de saisie
 
     buttonPanel.setLayout(new GridLayout());
-
+    //ici on creer les 3 boutons d'action dans le Jpanel situé en haut du Jpanel principal
     createButton.setText("Créer");
     createButton.addActionListener(this);
     buttonPanel.add(createButton);
-
+    
     updateButton.setText("Modifier");
     updateButton.addActionListener(this);
     buttonPanel.add(updateButton);
-
+   
     deleteButton.setText("Supprimer");
     deleteButton.addActionListener(this);
     buttonPanel.add(deleteButton);
@@ -74,21 +79,30 @@ public class MainFrame extends JFrame implements ActionListener {
 
     getContentPane().add(topPanel, BorderLayout.NORTH);
   }
-
+/**
+ * Methode d'initialisation des Jpanels/Jbuttons 
+ * creer le JPanel du haut de la fenetre (contenant les boutons) à l'aide de la methode makeTopPanel 
+ * Creer un Jpanel vide en bas de la fenetre dont la taille s'adaptera au JPanel principal (contenant le tableau actif)
+ * Creer le JPanel de selection des tableau (à gauche) et ses boutons à l'aide d'une boucle
+ */
   private void initComponents() {
     GridBagConstraints gridBagConstraints;
     tableChange = new ArrayList<>();
     makeTopPanel();
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    bottomPanel = new JPanel();
+    bottomPanel = new JPanel();   //Le JPanel du bas sera vide, il s'adapte à la taille du JPanel affichant le tableau courant
     tableChoicePanel = new JPanel();
     bottomPanel.setLayout(new BorderLayout());
-    bottomPanel.add(tablePanel, BorderLayout.CENTER);
+    bottomPanel.add(tablePanel, BorderLayout.CENTER); //Pour centrer le Jpanel qui affiche le tableau courant 
+    /**
+     * JPanel pour selectionner les differents tableaux
+     * Boucle for qui recupere le nom de chaque tableau et creer un bouton (pour un tableau) a chaque passage de boucle
+     */
     tableChoicePanel.setLayout(new GridBagLayout());
     for (int i = 0; i < 12; i++) {
-      tableChange.add(new JButton());
-      tableChange.get(i).setText(TABLE.name(i));
+      tableChange.add(new JButton());   //ajout d'un JButton a chaque passage dans la boucle 
+      tableChange.get(i).setText(TABLE.name(i));    //Recupere le nom du tableau et l'affiche dans le bouton 
       tableChange.get(i).addActionListener(this);
       gridBagConstraints = new GridBagConstraints();
       gridBagConstraints.gridx = 0;
@@ -102,7 +116,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
     pack();
   }
-
+/**
+ * Actions des boutons de la topbar (pour creer, supprimer, modifier un tableau) et ceux de la barre de choix des tableaux
+ * @param e evenement associé
+ */
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource().getClass() == JButton.class) {
@@ -112,7 +129,10 @@ public class MainFrame extends JFrame implements ActionListener {
           management.switchTable(i);
         }
       }
-      if (tmp == createButton) {
+      /**
+       * Pour associer les JButton de la topBar à leur action respective
+       */
+      if (tmp == createButton) {  
         management.create();
       } else if (tmp == updateButton) {
         management.update();

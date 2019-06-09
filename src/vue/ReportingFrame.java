@@ -19,8 +19,7 @@ import javax.swing.SwingConstants;
 import model.DAO.DAOFactory;
 
 /**
- *
- * @author Jerome
+ * Classe : affiche des statistiques sur le nombre d'eleves par niveau 
  */
 public class ReportingFrame extends JFrame {
 
@@ -29,7 +28,10 @@ public class ReportingFrame extends JFrame {
   private List<JProgressBar> bars;
   private ManagementInterface management;
   private Map<String, Integer> datas;
-
+  /**
+   * Constructeur : initialise tous les composants de la fenetre
+   * @param management effectue les actions associés aux tables/boutons
+   */
   public ReportingFrame(ManagementInterface management) {
     super();
     this.management = management;
@@ -42,7 +44,9 @@ public class ReportingFrame extends JFrame {
   public void setData() {
     datas = management.getReporting();
   }
-
+/**
+ * Initialisation de la fenetre et de ses composants 
+ */
   private void initComponents() {
     GridBagConstraints gridBagConstraints;
     GridBagConstraints gridBagConstraints1;
@@ -54,7 +58,9 @@ public class ReportingFrame extends JFrame {
 
     TitleLabel = new JLabel();
     
-
+    /**
+     * Diagramme en barres : pour chaque Map de niveau, on ajoute une barre et un label associé (pour le niveau) 
+     */
     for (Map.Entry<String, Integer> it : datas.entrySet()) {
       labels.add(new JLabel());
       bars.add(new JProgressBar());
@@ -65,7 +71,7 @@ public class ReportingFrame extends JFrame {
       gridBagConstraints.gridy = 2;
       gridBagConstraints.weightx = 1.0;
       getContentPane().add(labels.get(i), gridBagConstraints);
-      bars.get(i).setOrientation(JProgressBar.VERTICAL);
+      bars.get(i).setOrientation(JProgressBar.VERTICAL); //Parametres des barres 
       bars.get(i).setMaximum(DAOFactory.getInscriptionDAO().findAll().size());
       bars.get(i).setValue(it.getValue());
       gridBagConstraints1.gridx = i;
@@ -77,7 +83,7 @@ public class ReportingFrame extends JFrame {
       getContentPane().add(bars.get(i), gridBagConstraints1);
       i++;
     }
-    TitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    TitleLabel.setHorizontalAlignment(SwingConstants.CENTER); //Affichage 
     TitleLabel.setText("Elève par Niveau");
     gridBagConstraints = new GridBagConstraints();
     gridBagConstraints.gridx = 0;

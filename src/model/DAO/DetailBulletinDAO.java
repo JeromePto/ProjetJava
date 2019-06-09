@@ -50,7 +50,12 @@ public class DetailBulletinDAO extends DAO<DetailBulletin> {
     statement.executeUpdate();
     return true;
   }
-
+/**
+ * 
+ * @param id voir javadoc dans DAO
+ * @return
+ * @throws IllegalArgumentException 
+ */
   @Override
   public DetailBulletin find(int id) throws IllegalArgumentException {
     DetailBulletin det = null;

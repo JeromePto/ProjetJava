@@ -9,10 +9,6 @@ import model.local.TableRow;
  *
  * @author Jerome
  */
-/**
- * 
- * Classe modele pour les champs 
- */
 public class EcoleFieldModel {
   
   private List<String> fieldNames;
@@ -35,7 +31,7 @@ public class EcoleFieldModel {
       disable = new ArrayList<>();
       for (int i = 0 ; i < fieldNames.size() ; i++) {
         
-        if ((fieldNames.get(i) == "ID" || fieldNames.get(i) == "Moyenne")&&fieldNames.size()>1) {
+        if ((fieldNames.get(i) == "ID" || fieldNames.get(i) == "Moyenne")&&fieldNames.size()>1) { //pour desactiver la possibilité de modifier l'ID ou la moyenne d'un eleve 
           disable.add(true);
         } else {
           disable.add(false);

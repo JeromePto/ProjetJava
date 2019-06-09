@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * 
- * @author Jerome
+ * 
  */
 public class Classe extends TableRow {
 

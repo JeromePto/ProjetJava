@@ -1,0 +1,46 @@
+class Evaluation
+!!!151309.java!!!	Evaluation(in id : int, in note : float, in appreciation : String, inout detailBulletin : DetailBulletin)
+    super(id);
+    this.note = note;
+    this.appreciation = appreciation;
+    this.detailBulletin = detailBulletin;
+!!!151437.java!!!	getNote() : float
+    return note;
+!!!151565.java!!!	getAppreciation() : String
+    return appreciation;
+!!!151693.java!!!	getDetailBulletin() : DetailBulletin
+    return detailBulletin;
+!!!151821.java!!!	readId(inout printId : boolean) : String
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+!!!151949.java!!!	getInfo() : Set<String>
+    Set<String> out = new LinkedHashSet<>();
+    out.add(String.valueOf(note));
+    out.addAll(detailBulletin.getInfo());
+    return out;
+!!!152077.java!!!	toString() : String
+    return "Evaluation{" + "id=" + id + ", note=" + note + ", appreciation=" + appreciation + ", detailBulletin=" + detailBulletin + '}';
+!!!152205.java!!!	getStringRow() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(String.valueOf(note));
+    out.add(appreciation);
+    out.add(detailBulletin.readId(true));
+    return out;
+!!!152333.java!!!	getColumnName() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Note");
+    out.add("Appreciation");
+    out.add("Detail Bulletin");
+    return out;
+!!!152461.java!!!	getStringRowField() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(String.valueOf(note));
+    out.add(appreciation);
+    out.add(String.valueOf(detailBulletin.getId()));
+    return out;

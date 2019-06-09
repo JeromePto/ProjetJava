@@ -1,0 +1,5 @@
+class Eleve
+!!!149773.java!!!	Eleve(in id : int, in nom : String, in prenom : String)
+    super(id, nom, prenom);
+!!!149901.java!!!	isEleve() : boolean
+    return true;

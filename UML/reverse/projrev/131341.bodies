@@ -1,0 +1,44 @@
+class EnseignementDAO
+!!!137997.java!!!	EnseignementDAO(inout connect : Connection, in table : String)
+    super(connect, table);
+!!!138125.java!!!	create(inout obj : Enseignement) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO enseignement (CLASSE_ID, DISCIPLINE_ID, PERSONNE_ID) VALUES(?,?,?)");
+    statement.setObject(1, obj.getClasse().getId(), Types.INTEGER);
+    statement.setObject(2, obj.getDiscipline().getId(), Types.INTEGER);
+    statement.setObject(3, obj.getProfesseur().getId(), Types.INTEGER);
+    statement.executeUpdate();
+    return true;
+!!!138253.java!!!	update(inout obj : Enseignement) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE enseignement "
+        + "SET CLASSE_ID = ?, DISCIPLINE_ID = ?, PERSONNE_ID = ? "
+        + "WHERE ID = ?");
+    statement.setInt(1, obj.getClasse().getId());
+    statement.setInt(2, obj.getDiscipline().getId());
+    statement.setInt(3, obj.getProfesseur().getId());
+    statement.setInt(4, obj.getId());
+    statement.executeUpdate();
+    return true;
+!!!138381.java!!!	find(in id : int) : Enseignement
+    Enseignement ensei = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM enseignement WHERE ID = " + id);
+      if (result.first()) {
+        DAO<Classe> classe = DAOFactory.getClasseDAO();
+        DAO<Discipline> discipline = DAOFactory.getDisciplineDAO();
+        DAO<Professeur> professeur = DAOFactory.getProfesseurDAO();
+        ensei = new Enseignement(result.getInt("ID"),
+            classe.find(result.getInt("CLASSE_ID")),
+            discipline.find(result.getInt("DISCIPLINE_ID")),
+            professeur.find(result.getInt("PERSONNE_ID")));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return ensei;

@@ -18,7 +18,7 @@ import model.local.Inscription;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class InscriptionDAO extends DAO<Inscription> {
 

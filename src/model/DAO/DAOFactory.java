@@ -11,7 +11,7 @@ import model.TABLE;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class DAOFactory {
 

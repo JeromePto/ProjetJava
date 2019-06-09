@@ -19,7 +19,7 @@ import model.local.Professeur;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class EnseignementDAO extends DAO<Enseignement> {
 

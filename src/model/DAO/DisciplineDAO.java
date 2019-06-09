@@ -16,7 +16,7 @@ import model.local.Discipline;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class DisciplineDAO extends DAO<Discipline> {
 

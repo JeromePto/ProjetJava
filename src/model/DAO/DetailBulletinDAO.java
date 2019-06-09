@@ -18,7 +18,7 @@ import model.local.Enseignement;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class DetailBulletinDAO extends DAO<DetailBulletin> {
 

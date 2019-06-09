@@ -17,7 +17,7 @@ import model.local.Evaluation;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class EvaluationDAO extends DAO<Evaluation> {
 

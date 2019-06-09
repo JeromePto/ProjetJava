@@ -1,0 +1,27 @@
+class EcoleFieldModel
+!!!128013.java!!!	EcoleFieldModel(inout rows : Map<Integer, TableRow>)
+    if (!rows.isEmpty()) {
+      datas = new ArrayList<>();
+      for (Map.Entry<Integer, TableRow> entry : rows.entrySet()) {
+        TableRow value = entry.getValue();
+        if (this.fieldNames == null) {
+          fieldNames = value.getColumnName();
+        }
+        datas.add("");
+      }
+      disable = new ArrayList<>();
+      for (int i = 0 ; i < fieldNames.size() ; i++) {
+        
+        if ((fieldNames.get(i) == "ID" || fieldNames.get(i) == "Moyenne")&&fieldNames.size()>1) {
+          disable.add(true);
+        } else {
+          disable.add(false);
+        }
+      }
+    }
+!!!128141.java!!!	getFieldCount() : int
+    return fieldNames.size();
+!!!128269.java!!!	getFieldName(in field : int) : String
+    return fieldNames.get(field);
+!!!128397.java!!!	getDisableColumn(in column : int) : boolean
+    return disable.get(column);

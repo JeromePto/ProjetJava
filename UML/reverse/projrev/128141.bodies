@@ -1,0 +1,29 @@
+class EcoleTableModel
+!!!128525.java!!!	EcoleTableModel(inout rows : Map<Integer, TableRow>)
+    if (!rows.isEmpty()) {
+      datas = new ArrayList<>();
+      for (Map.Entry<Integer, TableRow> entry : rows.entrySet()) {
+        TableRow value = entry.getValue();
+        if (this.columnNames == null) {
+          columnNames = value.getColumnName();
+        }
+        datas.add(value.getStringRow());
+      }
+    }
+!!!128653.java!!!	getRowCount() : int
+    return datas.size();
+!!!128781.java!!!	getColumnCount() : int
+    return columnNames.size();
+!!!128909.java!!!	getValueAt(in rowIndex : int, in columnIndex : int) : Object
+    int tmp;
+    try {
+      tmp = Integer.parseInt(datas.get(rowIndex).get(columnIndex));
+      return tmp;
+    } catch (NumberFormatException ex) {
+    }
+    return datas.get(rowIndex).get(columnIndex);
+
+!!!129037.java!!!	getColumnName(in column : int) : String
+    return columnNames.get(column);
+!!!129165.java!!!	getColumnClass(in c : int) : Class
+    return getValueAt(0, c).getClass();

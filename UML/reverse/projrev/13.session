@@ -1,0 +1,17 @@
+window_sizes 1920 1017 450 1465 865 104
+
+diagrams
+  active  classdiagram_ref 128013 // d
+    1465 865 100 Custom 0 0
+end
+show_stereotypes
+selected operation_ref 155661 // getDebut
+open
+  
+  package_ref 128141 // controleur
+  classview_ref 128269 // vue
+  class_ref 132749 // Trimestre
+  classview_ref 128141 // unknown
+  classview_ref 128781 // aa
+end
+end

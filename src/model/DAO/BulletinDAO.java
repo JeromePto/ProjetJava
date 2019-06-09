@@ -18,7 +18,7 @@ import model.local.Trimestre;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class BulletinDAO extends DAO<Bulletin> {
 

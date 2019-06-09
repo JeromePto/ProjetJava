@@ -17,7 +17,7 @@ import model.local.Trimestre;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class TrimestreDAO extends DAO<Trimestre> {
 

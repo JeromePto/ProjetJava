@@ -1,0 +1,179 @@
+class Management
+!!!130573.java!!!	Management()
+    dao = DAOFactory.getAnneeScolaireDAO();
+    type = TABLE.ANNEESCOLAIRE;
+    datas = dao.findAll();
+    table = new MainTable(new EcoleTableModel(datas), this);
+    field = new FieldPanel(new EcoleFieldModel(datas));
+    report = new ReportingFrame(this);
+!!!130701.java!!!	switchTable(in tableId : int) : void
+    dao = DAOFactory.getDAOById(tableId);
+    datas = dao.findAll();
+    type = tableId;
+    table.changeTable(new EcoleTableModel(datas));
+    field.changeField(new EcoleFieldModel(datas));
+!!!130829.java!!!	updateTable() : void
+    switchTable(type);
+!!!130957.java!!!	getTable() : MainTable
+    return table;
+!!!131085.java!!!	getField() : FieldPanel
+    return field;
+!!!131213.java!!!	selectRow(in row : int) : void
+    int i = 0;
+    for (Map.Entry<Integer, TableRow> entry : datas.entrySet()) {
+      if (i == row) {
+        field.fillField(entry.getValue().getStringRowField());
+      }
+      i++;
+    }
+!!!131341.java!!!	rowFromField() : TableRow
+    List<String> inputs = field.getText();
+    if (inputs.get(0).equals("") && type != TABLE.ANNEESCOLAIRE) {
+      inputs.set(0, "-1");
+    }
+    TableRow out = null;
+    switch (type) {
+      case TABLE.ANNEESCOLAIRE:
+        out = new AnneeScolaire(Integer.parseInt(inputs.get(0)));
+        break;
+      case TABLE.BULLETIN:
+        out = new Bulletin(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            (Trimestre) DAOFactory.getTrimestreDAO().find(Integer.parseInt(inputs.get(2))),
+            (Inscription) DAOFactory.getInscriptionDAO().find(Integer.parseInt(inputs.get(3)))
+        );
+        break;
+      case TABLE.CLASSE:
+        out = new Classe(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            (AnneeScolaire) DAOFactory.getAnneeScolaireDAO().find(Integer.parseInt(inputs.get(2))),
+            (Niveau) DAOFactory.getNiveauDAO().find(Integer.parseInt(inputs.get(3)))
+        );
+        break;
+      case TABLE.DETAILBULLETIN:
+        out = new DetailBulletin(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            (Enseignement) DAOFactory.getEnseignementDAO().find(Integer.parseInt(inputs.get(2))),
+            (Bulletin) DAOFactory.getBulletinDAO().find(Integer.parseInt(inputs.get(3)))
+        );
+        break;
+      case TABLE.DISCIPLINE:
+        out = new Discipline(Integer.parseInt(inputs.get(0)),
+            inputs.get(1)
+        );
+        break;
+      case TABLE.ELEVE:
+        out = new Eleve(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            inputs.get(2)
+        );
+        break;
+      case TABLE.ENSEIGNEMENT:
+        out = new Enseignement(Integer.parseInt(inputs.get(0)),
+            (Classe) DAOFactory.getClasseDAO().find(Integer.parseInt(inputs.get(1))),
+            (Discipline) DAOFactory.getDisciplineDAO().find(Integer.parseInt(inputs.get(2))),
+            (Professeur) DAOFactory.getProfesseurDAO().find(Integer.parseInt(inputs.get(3)))
+        );
+        break;
+      case TABLE.EVALUATION:
+        out = new Evaluation(Integer.parseInt(inputs.get(0)),
+            Float.parseFloat(inputs.get(1)),
+            inputs.get(2),
+            (DetailBulletin) DAOFactory.getDetailBulletinDAO().find(Integer.parseInt(inputs.get(3)))
+        );
+        break;
+      case TABLE.INSCRIPTION:
+        out = new Inscription(Integer.parseInt(inputs.get(0)),
+            (Classe) DAOFactory.getClasseDAO().find(Integer.parseInt(inputs.get(1))),
+            (Eleve) DAOFactory.getEleveDAO().find(Integer.parseInt(inputs.get(2)))
+        );
+        break;
+      case TABLE.NIVEAU:
+        out = new Niveau(Integer.parseInt(inputs.get(0)),
+            inputs.get(2)
+        );
+        break;
+      case TABLE.PROFESSEUR:
+        out = new Professeur(Integer.parseInt(inputs.get(0)),
+            inputs.get(1),
+            inputs.get(2)
+        );
+        break;
+      case TABLE.TRIMESTRE: {
+        try {
+          out = new Trimestre(Integer.parseInt(inputs.get(0)),
+              (AnneeScolaire) DAOFactory.getAnneeScolaireDAO().find(Integer.parseInt(inputs.get(1))),
+              Integer.parseInt(inputs.get(2)),
+              inputs.get(3),
+              inputs.get(4)
+          );
+        } catch (ParseException ex) {
+          throw new NumberFormatException(ex.toString());
+        }
+      }
+      break;
+      default:
+        throw new RuntimeException("Internal error");
+    }
+    return out;
+!!!131469.java!!!	create() : void
+    TableRow tmp;
+    try {
+      tmp = rowFromField();
+      dao.create(tmp);
+      updateTable();
+    } catch (NumberFormatException ex) {
+      System.out.println(ex);
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "Format error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
+    } catch (IllegalArgumentException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields : An ID doesn't exist", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
+    }
+!!!131597.java!!!	update() : void
+    TableRow tmp;
+    try {
+      tmp = rowFromField();
+      dao.update(tmp);
+      updateTable();
+    } catch (NumberFormatException ex) {
+      System.out.println(ex);
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "Format error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
+    } catch (IllegalArgumentException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields : An ID doesn't exist", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
+    }
+!!!131725.java!!!	delete() : void
+    TableRow tmp;
+    try {
+      tmp = rowFromField();
+      dao.delete(tmp);
+      updateTable();
+    } catch (NumberFormatException ex) {
+      System.out.println(ex);
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "Format error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
+    } catch (IllegalArgumentException ex) {
+      JOptionPane.showMessageDialog(new JFrame(), "Error in fields : An ID doesn't exist", "SQL error", JOptionPane.ERROR_MESSAGE);
+      System.out.println(ex);
+    }
+!!!131853.java!!!	getReporting() : Map<String, Integer>
+    Map<String, Integer> out = new HashMap<>();
+    DAO<Classe> dao = DAOFactory.getClasseDAO();
+    DAO<Inscription> dao2 = DAOFactory.getInscriptionDAO();
+    for (Map.Entry<Integer, TableRow> it : dao.findAll().entrySet()) {
+      out.put(((Classe) it.getValue()).getNom(), 0);
+      for (Map.Entry<Integer, TableRow> it2 : dao2.findAll().entrySet()) {
+        if (((Inscription) it2.getValue()).getClasse().getNom().equals(((Classe) it.getValue()).getNom())) {
+          out.replace(((Classe) it.getValue()).getNom(), out.get(((Classe) it.getValue()).getNom())+1);
+        }
+      }
+    }
+    return out;

@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * 
- * @author Jerome
+ * 
  */
 public class Niveau extends TableRow{
   

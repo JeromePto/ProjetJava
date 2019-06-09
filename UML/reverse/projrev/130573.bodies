@@ -1,0 +1,42 @@
+class DetailBulletinDAO
+!!!136205.java!!!	DetailBulletinDAO(inout connect : Connection, in table : String)
+    super(connect, table);
+!!!136333.java!!!	create(inout obj : DetailBulletin) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO detailbulletin (APPRECIATION, BULLETIN_ID, ENSEIGNEMENT_ID) VALUES(?,?,?)");
+    statement.setObject(1, obj.getAppreciation(), Types.VARCHAR);
+    statement.setObject(2, obj.getBulletin().getId(), Types.INTEGER);
+    statement.setObject(3, obj.getEnseignement().getId(), Types.INTEGER);
+    statement.executeUpdate();
+    return true;
+!!!136461.java!!!	update(inout obj : DetailBulletin) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE detailbulletin "
+        + "SET APPRECIATION = ?, BULLETIN_ID = ?, ENSEIGNEMENT_ID = ? "
+        + "WHERE ID = ?");
+    statement.setString(1, obj.getAppreciation());
+    statement.setInt(2, obj.getBulletin().getId());
+    statement.setInt(3, obj.getEnseignement().getId());
+    statement.setInt(4, obj.getId());
+    statement.executeUpdate();
+    return true;
+!!!136589.java!!!	find(in id : int) : DetailBulletin
+    DetailBulletin det = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM detailbulletin WHERE ID = " + id);
+      if (result.first()) {
+        DAO<Enseignement> enseignement = DAOFactory.getEnseignementDAO();
+        DAO<Bulletin> bulletin = DAOFactory.getBulletinDAO();
+        det = new DetailBulletin(result.getInt("ID"), result.getString("APPRECIATION"),
+            enseignement.find(result.getInt("ENSEIGNEMENT_ID")),
+            bulletin.find(result.getInt("BULLETIN_ID")));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return det;

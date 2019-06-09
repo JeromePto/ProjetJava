@@ -1,0 +1,35 @@
+format 215
+"src" // src
+  revision 1
+  modified_by 13 "Jerome"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "D:\\Documents\\Programme\\NetBeansProjects\\Project2\\src/"
+  package_ref 128141 // controleur
+
+  package_ref 128397 // vue
+
+  package_ref 128525 // model
+end

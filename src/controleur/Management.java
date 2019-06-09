@@ -29,13 +29,12 @@ import model.local.Professeur;
 import model.local.TableRow;
 import model.local.Trimestre;
 import vue.FieldPanel;
-import vue.MainFrame;
 import vue.MainTable;
 import vue.ReportingFrame;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class Management implements ManagementInterface {
 

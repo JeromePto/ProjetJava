@@ -7,7 +7,7 @@ import java.util.Set;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public abstract class Personne extends TableRow {
 

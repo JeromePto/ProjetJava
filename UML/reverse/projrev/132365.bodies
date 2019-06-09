@@ -1,0 +1,56 @@
+class ProfesseurDAO
+!!!140045.java!!!	ProfesseurDAO(inout connect : Connection, in table : String)
+    super(connect, table);
+!!!140173.java!!!	create(inout obj : Professeur) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO personne (NOM, PRENOM, TYPE) VALUES(?,?,2)");
+    statement.setObject(1, obj.getNom(), Types.VARCHAR);
+    statement.setObject(2, obj.getPrenom(), Types.VARCHAR);
+    statement.executeUpdate();
+    return true;
+!!!140301.java!!!	delete(inout obj : Professeur) : boolean
+    this.connect.createStatement().executeUpdate(
+        "DELETE FROM personne WHERE TYPE = 2 AND ID = " + obj.getId());
+    return true;
+!!!140429.java!!!	update(inout obj : Professeur) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE personne "
+        + "SET NOM = ?, PRENOM = ? "
+        + "WHERE TYPE = 2 AND ID = ?");
+    statement.setString(1, obj.getNom());
+    statement.setString(2, obj.getPrenom());
+    statement.setInt(3, obj.getId());
+    statement.executeUpdate();
+    return true;
+!!!140557.java!!!	find(in id : int) : Professeur
+    Professeur prof = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM personne WHERE TYPE = 2 AND ID = " + id);
+      if (result.first()) {
+        prof = new Professeur(result.getInt("ID"),
+            result.getString("NOM"),
+            result.getString("PRENOM"));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return prof;
+!!!140685.java!!!	findAll() : TableRow
+    Map<Integer, TableRow> out = new HashMap<>();
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM " + table + " WHERE TYPE = 2");
+      while (result.next()) {
+        out.put(result.getInt("ID"), (TableRow) this.find(result.getInt("ID")));
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return out;

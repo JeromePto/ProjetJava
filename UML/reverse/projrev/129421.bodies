@@ -1,0 +1,10 @@
+class EcoleConnection
+!!!131981.java!!!	getInstance() : Connection
+    if (connect == null) {
+      try {
+        connect = DriverManager.getConnection(url, user, password);
+      } catch (SQLException ex) {
+        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, "Erreur de connection", ex);
+      }
+    }
+    return connect;

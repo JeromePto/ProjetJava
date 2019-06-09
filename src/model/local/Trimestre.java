@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class Trimestre extends TableRow {
 

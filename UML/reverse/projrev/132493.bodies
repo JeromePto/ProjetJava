@@ -1,0 +1,5 @@
+class Professeur
+!!!154765.java!!!	isEleve() : boolean
+    return false;
+!!!154893.java!!!	Professeur(in id : int, in nom : String, in prenom : String)
+    super(id, nom, prenom);

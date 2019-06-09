@@ -10,7 +10,7 @@ import vue.ReportingFrame;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class Launcher {
   

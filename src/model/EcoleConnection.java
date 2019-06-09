@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  * @see https://openclassrooms.com/fr/courses/26832-apprenez-a-programmer-en-java/26597-limitez-le-nombre-de-connexions
- * @author Jerome
+ * 
  */
 public class EcoleConnection {
   /**

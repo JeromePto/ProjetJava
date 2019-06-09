@@ -19,7 +19,7 @@ import model.local.TableRow;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class EleveDAO extends DAO<Eleve> {
 

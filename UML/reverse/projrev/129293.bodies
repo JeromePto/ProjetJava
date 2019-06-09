@@ -1,0 +1,22 @@
+class DAO
+!!!132237.java!!!	DAO(inout connect : Connection, in table : String)
+    this.connect = connect;
+    this.table = table;
+!!!132493.java!!!	delete(inout obj : T) : boolean
+    this.connect.createStatement().executeUpdate(
+          "DELETE FROM " + table + " WHERE ID = " + obj.getId());
+    return true;
+!!!132877.java!!!	findAll() : TableRow
+    Map<Integer, TableRow> out = new HashMap<>();    
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM " + table + " WHERE 1");
+      while(result.next()) {
+        out.put(result.getInt("ID"), this.find(result.getInt("ID")));
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return out;

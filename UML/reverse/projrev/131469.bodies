@@ -1,0 +1,47 @@
+class Enseignement
+!!!150029.java!!!	getClasse() : Classe
+    return classe;
+!!!150157.java!!!	getDiscipline() : Discipline
+    return discipline;
+!!!150285.java!!!	getProfesseur() : Professeur
+    return professeur;
+!!!150413.java!!!	Enseignement(in id : int, inout classe : Classe, inout discipline : Discipline, inout professeur : Professeur)
+    super(id);
+    this.classe = classe;
+    this.discipline = discipline;
+    this.professeur = professeur;
+!!!150541.java!!!	readId(inout printId : boolean) : String
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+!!!150669.java!!!	getInfo() : Set<String>
+    Set<String> out = new LinkedHashSet<>();
+    out.addAll(discipline.getInfo());
+    out.addAll(classe.getInfo());
+    out.addAll(professeur.getInfo());
+    return out;
+!!!150797.java!!!	toString() : String
+    return "Enseignement{" + "id=" + id + ", classe=" + classe + ", discipline=" + discipline + ", professeur=" + professeur + '}';
+!!!150925.java!!!	getStringRow() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(classe.readId(true));
+    out.add(discipline.readId(true));
+    out.add(professeur.readId(true));
+    return out;
+!!!151053.java!!!	getColumnName() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Classe");
+    out.add("Discipline");
+    out.add("Professeur");
+    return out;
+!!!151181.java!!!	getStringRowField() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(String.valueOf(classe.getId()));
+    out.add(String.valueOf(discipline.getId()));
+    out.add(String.valueOf(professeur.getId()));
+    return out;

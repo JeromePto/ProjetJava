@@ -1,0 +1,40 @@
+class EvaluationDAO
+!!!138509.java!!!	EvaluationDAO(inout connect : Connection, in table : String)
+    super(connect, table);
+!!!138637.java!!!	create(inout obj : Evaluation) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO evaluation (NOTE, APPRECIATION, DETAILBULLETIN_ID) VALUES(?,?,?)");
+    statement.setObject(1, obj.getNote(), Types.FLOAT);
+    statement.setObject(2, obj.getAppreciation(), Types.VARCHAR);
+    statement.setObject(3, obj.getDetailBulletin().getId(), Types.INTEGER);
+    statement.executeUpdate();
+    return true;
+!!!138765.java!!!	update(inout obj : Evaluation) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE evaluation "
+        + "SET NOTE = ?, APPRECIATION = ?, DETAILBULLETIN_ID = ? "
+        + "WHERE ID = ?");
+    statement.setFloat(1, obj.getNote());
+    statement.setString(2, obj.getAppreciation());
+    statement.setInt(3, obj.getDetailBulletin().getId());
+    statement.setInt(4, obj.getId());
+    statement.executeUpdate();
+    return true;
+!!!138893.java!!!	find(in id : int) : Evaluation
+    Evaluation eval = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM evaluation WHERE ID = " + id);
+      if (result.first()) {
+        DAO<DetailBulletin> detailBulletin = DAOFactory.getDetailBulletinDAO();
+        eval = new Evaluation(result.getInt("ID"), result.getFloat("NOTE"),
+            result.getString("APPRECIATION"), detailBulletin.find(result.getInt("DETAILBULLETIN_ID")));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return eval;

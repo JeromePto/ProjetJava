@@ -1,6 +1,5 @@
 package vue;
 
-import controleur.Management;
 import controleur.ManagementInterface;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;

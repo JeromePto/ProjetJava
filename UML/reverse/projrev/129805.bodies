@@ -1,0 +1,27 @@
+class AnneeScolaire
+!!!141965.java!!!	AnneeScolaire(in id : int)
+    super(id);
+!!!142093.java!!!	toString() : String
+    return "AnneeScolaire{" + "id=" + id + '}';
+!!!142221.java!!!	readId(inout printId : boolean) : String
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+!!!142349.java!!!	getInfo() : Set<String>
+    Set<String> out = new LinkedHashSet<>();
+    out.add(String.valueOf(id) + "-" + String.valueOf(id+1));
+    return out;
+!!!142477.java!!!	getStringRow() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    return out;
+!!!142605.java!!!	getColumnName() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    return out;
+!!!142733.java!!!	getStringRowField() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    return out;

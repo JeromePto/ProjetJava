@@ -1,0 +1,26 @@
+class MainTable
+!!!157965.java!!!	MainTable(inout model : TableModel, inout management : ManagementInterface)
+    super(new GridLayout(1,0));
+    this.management = management;
+    createTable(model);
+    scrollPane = new JScrollPane(table);
+    add(scrollPane);
+!!!158093.java!!!	changeTable(inout model : TableModel) : void
+    remove(scrollPane);
+    createTable(model);
+    scrollPane = new JScrollPane(table);
+    add(scrollPane);
+    validate();
+!!!158221.java!!!	createTable(inout model : TableModel) : void
+    table = new JTable(model);
+    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting() == false) {
+          management.selectRow(table.getSelectedRow());
+        }
+      }
+    });
+    table.setAutoCreateRowSorter(true);
+    table.setFillsViewportHeight(true);

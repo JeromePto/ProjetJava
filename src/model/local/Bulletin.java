@@ -13,7 +13,7 @@ import model.EcoleConnection;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class Bulletin extends TableRow {
 

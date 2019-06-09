@@ -14,7 +14,7 @@ import model.EcoleConnection;
 
 /**
  * 
- * @author Jerome
+ * 
  */
 public class DetailBulletin extends TableRow{
 

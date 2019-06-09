@@ -1,0 +1,76 @@
+class MainFrame
+!!!157453.java!!!	MainFrame(inout management : ManagementInterface)
+    super();
+    this.management = management;
+    this.tablePanel = management.getTable();
+    this.fieldPanel = management.getField();
+    initComponents();
+!!!157581.java!!!	makeTopPanel() : void
+    topPanel = new JPanel();
+    buttonPanel = new JPanel();
+    createButton = new JButton();
+    updateButton = new JButton();
+    deleteButton = new JButton();
+
+    topPanel.setLayout(new BorderLayout());
+    topPanel.add(fieldPanel, BorderLayout.CENTER);
+
+    buttonPanel.setLayout(new GridLayout());
+
+    createButton.setText("Créer");
+    createButton.addActionListener(this);
+    buttonPanel.add(createButton);
+
+    updateButton.setText("Modifier");
+    updateButton.addActionListener(this);
+    buttonPanel.add(updateButton);
+
+    deleteButton.setText("Supprimer");
+    deleteButton.addActionListener(this);
+    buttonPanel.add(deleteButton);
+
+    topPanel.add(buttonPanel, BorderLayout.EAST);
+
+    getContentPane().add(topPanel, BorderLayout.NORTH);
+!!!157709.java!!!	initComponents() : void
+    GridBagConstraints gridBagConstraints;
+    tableChange = new ArrayList<>();
+    makeTopPanel();
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    bottomPanel = new JPanel();
+    tableChoicePanel = new JPanel();
+    bottomPanel.setLayout(new BorderLayout());
+    bottomPanel.add(tablePanel, BorderLayout.CENTER);
+    tableChoicePanel.setLayout(new GridBagLayout());
+    for (int i = 0; i < 12; i++) {
+      tableChange.add(new JButton());
+      tableChange.get(i).setText(TABLE.name(i));
+      tableChange.get(i).addActionListener(this);
+      gridBagConstraints = new GridBagConstraints();
+      gridBagConstraints.gridx = 0;
+      gridBagConstraints.gridy = i;
+      gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+      tableChoicePanel.add(tableChange.get(i), gridBagConstraints);
+    }
+
+    bottomPanel.add(tableChoicePanel, BorderLayout.WEST);
+    getContentPane().add(bottomPanel, BorderLayout.CENTER);
+
+    pack();
+!!!157837.java!!!	actionPerformed(inout e : ActionEvent) : void
+    if (e.getSource().getClass() == JButton.class) {
+      JButton tmp = (JButton) e.getSource();
+      for (int i = 0; i < 12; i++) {
+        if (tmp == tableChange.get(i)) {
+          management.switchTable(i);
+        }
+      }
+      if (tmp == createButton) {
+        management.create();
+      } else if (tmp == updateButton) {
+        management.update();
+      } else if (tmp == deleteButton) {
+        management.delete();
+      }
+    }

@@ -1,0 +1,9 @@
+class Launcher
+!!!129293.java!!!	main(inout args : String [[]]) : void
+    Launcher launcher = new Launcher();
+!!!129421.java!!!	Launcher()
+    Management management = new Management();
+    MainFrame mainFrame = new MainFrame(management);
+    ReportingFrame report = new ReportingFrame(management);
+    mainFrame.setVisible(true);
+    report.setVisible(true);

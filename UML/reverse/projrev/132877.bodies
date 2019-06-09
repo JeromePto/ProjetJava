@@ -1,0 +1,39 @@
+class Personne
+!!!148493.java!!!	Personne(in id : int, in nom : String, in prenom : String)
+    super(id);
+    this.nom = nom;
+    this.prenom = prenom;
+!!!148749.java!!!	toString() : String
+    return "Personne{" + "id=" + id + ", nom=" + nom + ", Prenom=" + prenom + '}';
+!!!148877.java!!!	getNom() : String
+    return nom;
+!!!149005.java!!!	getPrenom() : String
+    return prenom;
+!!!149133.java!!!	readId(inout printId : boolean) : String
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+!!!149261.java!!!	getInfo() : Set<String>
+    Set<String> out = new LinkedHashSet<>();
+    out.add((isEleve() ? "Eleve" : "Prof") + " " + prenom + " " + nom);
+    return out;
+!!!149389.java!!!	getStringRow() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    out.add(prenom);
+    return out;
+!!!149517.java!!!	getColumnName() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Nom");
+    out.add("Prenom");
+    return out;
+!!!149645.java!!!	getStringRowField() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    out.add(prenom);
+    return out;

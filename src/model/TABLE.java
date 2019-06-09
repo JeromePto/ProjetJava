@@ -7,7 +7,7 @@ package model;
 
 /**
  * classe de constante qui permet d'assigner des ID et des noms au tables
- * @author Jerome
+ * 
  */
 public class TABLE {
   

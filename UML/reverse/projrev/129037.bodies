@@ -1,0 +1,5 @@
+class TableRow
+!!!141325.java!!!	TableRow(in id : int)
+    this.id = id;
+!!!141837.java!!!	getId() : int
+    return id;

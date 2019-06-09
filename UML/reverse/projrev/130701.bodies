@@ -1,0 +1,71 @@
+class DetailBulletin
+!!!145805.java!!!	DetailBulletin(in id : int, in appreciation : String, inout enseignement : Enseignement, inout bulletin : Bulletin)
+    super(id);
+    this.appreciation = appreciation;
+    this.enseignement = enseignement;
+    this.bulletin = bulletin;
+    this.average = -1f;
+!!!145933.java!!!	computeAverage(inout connect : Connection) : void
+    try {
+      ResultSet result = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT if(COUNT(NOTE)=0, -1.0, AVG(NOTE)) AS AVERAGE "
+                  + "FROM evaluation "
+                  + "WHERE DETAILBULLETIN_ID = " + id);
+      if (result.first()) {
+        average = result.getFloat("AVERAGE");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+!!!146061.java!!!	getAverage() : float
+    if (average == -1)
+      computeAverage(EcoleConnection.getInstance());
+    return average;
+!!!146189.java!!!	getStringAverage() : String
+    if (average == -1)
+      computeAverage(EcoleConnection.getInstance());
+    return average == -1 ? "No average" : String.valueOf(average);
+!!!146317.java!!!	getAppreciation() : String
+    return appreciation;
+!!!146445.java!!!	getEnseignement() : Enseignement
+    return enseignement;
+!!!146573.java!!!	getBulletin() : Bulletin
+    return bulletin;
+!!!146701.java!!!	readId(inout printId : boolean) : String
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+!!!146829.java!!!	getInfo() : Set<String>
+    Set<String> out = new LinkedHashSet<>();
+    out.addAll(enseignement.getInfo());
+    out.addAll(bulletin.getInfo());
+    return out;
+!!!146957.java!!!	toString() : String
+    return "DetailBulletin{" + "id=" + id + ", appreciation=" + appreciation + ", enseignement=" + enseignement + ", bulletin=" + bulletin + '}';
+!!!147085.java!!!	getStringRow() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(appreciation);
+    out.add(enseignement.readId(true));
+    out.add(bulletin.readId(true));
+    out.add(getStringAverage());
+    return out;
+!!!147213.java!!!	getColumnName() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Apperciation");
+    out.add("Enseignement");
+    out.add("Bulletin");
+    out.add("Moyenne");
+    return out;
+!!!147341.java!!!	getStringRowField() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(appreciation);
+    out.add(String.valueOf(enseignement.getId()));
+    out.add(String.valueOf(bulletin.getId()));
+    out.add(getStringAverage());
+    return out;

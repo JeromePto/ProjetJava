@@ -1,0 +1,34 @@
+class DisciplineDAO
+!!!136717.java!!!	DisciplineDAO(inout connect : Connection, in table : String)
+    super(connect, table);
+!!!136845.java!!!	create(inout obj : Discipline) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO discipline (NOM) VALUES(?)");
+    statement.setObject(1, obj.getNom(), Types.VARCHAR);
+    statement.executeUpdate();
+    return true;
+!!!136973.java!!!	update(inout obj : Discipline) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE discipline "
+        + "SET NOM = ? "
+        + "WHERE ID = ?");
+    statement.setString(1, obj.getNom());
+    statement.setInt(2, obj.getId());
+    statement.executeUpdate();
+    return true;
+!!!137101.java!!!	find(in id : int) : Discipline
+    Discipline dis = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM discipline WHERE ID = " + id);
+      if (result.first()) {
+        dis = new Discipline(result.getInt("ID"), result.getString("NOM"));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return dis;

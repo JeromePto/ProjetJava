@@ -1,0 +1,56 @@
+class FieldPanel
+!!!156813.java!!!	FieldPanel(inout model : EcoleFieldModel)
+    super();
+    headers = new ArrayList<>();
+    fields = new ArrayList<>();
+    this.model = model;
+    initComponents();
+!!!156941.java!!!	initComponents() : void
+    setLayout(new GridLayout(2, 0));    
+    for(int i = 0 ; i < model.getFieldCount() ; i++) {
+      headers.add(new JLabel());
+      headers.get(i).setText(model.getFieldName(i));
+      add(headers.get(i));
+    }
+    
+    for(int i = 0 ; i < model.getFieldCount() ; i++) {
+      fields.add(new JTextField());
+      if (model.getDisableColumn(i)) {
+        fields.get(i).setEditable(false);
+        fields.get(i).setBackground(Color.LIGHT_GRAY);
+      }
+      add(fields.get(i));
+    }
+!!!157069.java!!!	changeField(inout model : EcoleFieldModel) : void
+    removeAll();
+    headers.clear();
+    fields.clear();
+    this.model = model;
+    for(int i = 0 ; i < model.getFieldCount() ; i++) {
+      headers.add(new JLabel());
+      headers.get(i).setText(model.getFieldName(i));
+      add(headers.get(i));
+    }
+    
+    for(int i = 0 ; i < model.getFieldCount() ; i++) {
+      fields.add(new JTextField());
+      if (model.getDisableColumn(i)) {
+        fields.get(i).setEditable(false);
+        fields.get(i).setBackground(Color.LIGHT_GRAY);
+      }
+      add(fields.get(i));
+    }
+    validate();
+!!!157197.java!!!	fillField(inout values : List<String>) : void
+    if (values.size() != fields.size()) {
+      throw new RuntimeException("Internal error 3");
+    }
+    for(int i = 0 ; i < values.size() ; i++) {
+      fields.get(i).setText(values.get(i));
+    }    
+!!!157325.java!!!	getText() : List<String>
+    List<String> out = new ArrayList<>();
+    for(JTextField it : fields) {
+      out.add(it.getText());
+    }
+    return out;

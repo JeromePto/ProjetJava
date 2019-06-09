@@ -1,0 +1,40 @@
+class Inscription
+!!!152589.java!!!	Inscription(in id : int, inout classe : Classe, inout eleve : Eleve)
+    super(id);
+    this.classe = classe;
+    this.eleve = eleve;
+!!!152717.java!!!	getClasse() : Classe
+    return classe;
+!!!152845.java!!!	getEleve() : Eleve
+    return eleve;
+!!!152973.java!!!	readId(inout printId : boolean) : String
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+!!!153101.java!!!	getInfo() : Set<String>
+    Set<String> out = new LinkedHashSet<>();
+    out.addAll(eleve.getInfo());
+    out.addAll(classe.getInfo());
+    return out;
+!!!153229.java!!!	toString() : String
+    return "Inscription{" + "id=" + id + ", classe=" + classe + ", eleve=" + eleve + '}';
+!!!153357.java!!!	getStringRow() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(classe.readId(true));
+    out.add(eleve.readId(true));
+    return out;
+!!!153485.java!!!	getColumnName() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Classe");
+    out.add("Eleve");
+    return out;
+!!!153613.java!!!	getStringRowField() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(String.valueOf(classe.getId()));
+    out.add(String.valueOf(eleve.getId()));
+    return out;

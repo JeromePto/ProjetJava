@@ -13,7 +13,7 @@ import model.local.TableRow;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class EcoleTableModel extends AbstractTableModel {
 

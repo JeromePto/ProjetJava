@@ -1,0 +1,1913 @@
+format 215
+"DAO" // src::model::DAO
+  revision 1
+  modified_by 13 "Jerome"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "D:\\Documents\\Programme\\NetBeansProjects\\Project2\\src/model/DAO/"
+  java_package "model.DAO"
+  classview 128525 "DAO"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 129293 "DAO"
+      abstract visibility public 
+      nformals 1
+      formal name "T" type "" explicit_default_value ""
+        extends class_ref 129037 // TableRow
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@param <T>
+@see https://openclassrooms.com/fr/courses/26832-apprenez-a-programmer-en-java/26830-liez-vos-tables-avec-des-objets-java-le-pattern-dao
+@author Jerome
+"
+      attribute 130829 "connect"
+	protected explicit_type "Connection"
+	init_value " null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Connection state
+
+"
+      end
+
+      attribute 130957 "table"
+	protected explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 132237 "DAO"
+	cpp_inline public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Constructor
+@param connect Connection parmeter
+"
+      end
+
+      operation 132365 "create"
+	abstract cpp_inline public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" explicit_type "T"
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "create object in database
+@param obj object to create
+@return success
+"
+      end
+
+      operation 132493 "delete"
+	cpp_inline public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" explicit_type "T"
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "delete object in database
+@param obj object to delete
+@return success
+"
+      end
+
+      operation 132621 "update"
+	abstract cpp_inline public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" explicit_type "T"
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "update object in database
+@param obj object to update
+@return success
+"
+      end
+
+      operation 132749 "find"
+	abstract cpp_inline public explicit_return_type "T"
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}<T> ${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "find object in DB
+@param id id of object in DB
+@return the object
+"
+      end
+
+      operation 132877 "findAll"
+	cpp_inline public return_type class_ref 129037 // TableRow
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map<Integer, ${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 129677 "AnneeScolaireDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 128909 // <realization>
+	relation 128909 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 128909 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 133005 "AnneeScolaireDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 133133 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 129805 // AnneeScolaire
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 133261 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 129805 // AnneeScolaire
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 133389 "find"
+	public return_type class_ref 129805 // AnneeScolaire
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 129933 "BulletinDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 129037 // <realization>
+	relation 129037 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 129037 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 133517 "BulletinDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 133645 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 130061 // Bulletin
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 133773 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 130061 // Bulletin
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 133901 "find"
+	public return_type class_ref 130061 // Bulletin
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 130189 "ClasseDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 129165 // <realization>
+	relation 129165 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 129165 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 134029 "ClasseDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 134157 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 130317 // Classe
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 134285 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 130317 // Classe
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 134413 "find"
+	public return_type class_ref 130317 // Classe
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 130445 "DAOFactory"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      attribute 131085 "connect"
+	class_attribute const_attribute protected explicit_type "Connection"
+	init_value " EcoleConnection.getInstance()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Connection state
+
+"
+      end
+
+      operation 134541 "getEvaluationDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 134669 "getNiveauDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 134797 "getClasseDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 134925 "getAnneeScolaireDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135053 "getTrimestreDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135181 "getBulletinDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135309 "getInscriptionDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135437 "getEleveDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135565 "getProfesseurDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135693 "getDisciplineDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135821 "getEnseignementDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135949 "getDetailBulletinDAO"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136077 "getDAOById"
+	class_operation public return_type class_ref 129293 // DAO
+	nparams 1
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 130573 "DetailBulletinDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 129293 // <realization>
+	relation 129293 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 129293 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 136205 "DetailBulletinDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136333 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 130701 // DetailBulletin
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 136461 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 130701 // DetailBulletin
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 136589 "find"
+	public return_type class_ref 130701 // DetailBulletin
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 130829 "DisciplineDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 129421 // <realization>
+	relation 129421 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 129421 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 136717 "DisciplineDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136845 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 130957 // Discipline
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 136973 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 130957 // Discipline
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 137101 "find"
+	public return_type class_ref 130957 // Discipline
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 131085 "EleveDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 129549 // <realization>
+	relation 129549 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 129549 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 137229 "EleveDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137357 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 131213 // Eleve
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 137485 "delete"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 131213 // Eleve
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 137613 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 131213 // Eleve
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 137741 "find"
+	public return_type class_ref 131213 // Eleve
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 137869 "findAll"
+	public return_type class_ref 129037 // TableRow
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map<Integer, ${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 131341 "EnseignementDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 129677 // <realization>
+	relation 129677 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 129677 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 137997 "EnseignementDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138125 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 131469 // Enseignement
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 138253 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 131469 // Enseignement
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 138381 "find"
+	public return_type class_ref 131469 // Enseignement
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 131597 "EvaluationDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 129805 // <realization>
+	relation 129805 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 129805 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 138509 "EvaluationDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138637 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 131725 // Evaluation
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 138765 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 131725 // Evaluation
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 138893 "find"
+	public return_type class_ref 131725 // Evaluation
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 131853 "InscriptionDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 129933 // <realization>
+	relation 129933 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 129933 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 139021 "InscriptionDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139149 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 131981 // Inscription
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 139277 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 131981 // Inscription
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 139405 "find"
+	public return_type class_ref 131981 // Inscription
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 132109 "NiveauDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 130061 // <realization>
+	relation 130061 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 130061 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 139533 "NiveauDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139661 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 132237 // Niveau
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 139789 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 132237 // Niveau
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 139917 "find"
+	public return_type class_ref 132237 // Niveau
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 132365 "ProfesseurDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 130189 // <realization>
+	relation 130189 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 130189 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 140045 "ProfesseurDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140173 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 132493 // Professeur
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 140301 "delete"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 132493 // Professeur
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 140429 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 132493 // Professeur
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 140557 "find"
+	public return_type class_ref 132493 // Professeur
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 140685 "findAll"
+	public return_type class_ref 129037 // TableRow
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}Map<Integer, ${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 132621 "TrimestreDAO"
+      visibility public 
+      nactuals 1
+      actual class class_ref 129293 // DAO
+        rank 0 explicit_value ""
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@author Jerome
+"
+      classrelation 130317 // <realization>
+	relation 130317 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}"
+	    classrelation_ref 130317 // <realization>
+	  b parent class_ref 129293 // DAO
+      end
+
+      operation 140813 "TrimestreDAO"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "connect" explicit_type "Connection"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140941 "create"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 132749 // Trimestre
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 141069 "update"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "obj" type class_ref 132749 // Trimestre
+	nexceptions 1
+	  explicit_exception "SQLException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 141197 "find"
+	public return_type class_ref 132749 // Trimestre
+	nparams 1
+	  param in name "id" explicit_type "int"
+	nexceptions 1
+	  explicit_exception "IllegalArgumentException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 128269 "DAO"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128909 "DAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.TableRow;
+${definition}"
+      associated_elems
+	class_ref 129293 // DAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 129037 "AnneeScolaireDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.AnneeScolaire;
+${definition}"
+      associated_elems
+	class_ref 129677 // AnneeScolaireDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 129165 "BulletinDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.Bulletin;
+import model.local.Inscription;
+import model.local.Trimestre;
+${definition}"
+      associated_elems
+	class_ref 129933 // BulletinDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 129293 "ClasseDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.AnneeScolaire;
+import model.local.Classe;
+import model.local.Niveau;
+${definition}"
+      associated_elems
+	class_ref 130189 // ClasseDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 129421 "DAOFactory"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import model.EcoleConnection;
+import java.sql.Connection;
+import model.TABLE;
+${definition}"
+      associated_elems
+	class_ref 130445 // DAOFactory
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 129549 "DetailBulletinDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.Bulletin;
+import model.local.DetailBulletin;
+import model.local.Enseignement;
+${definition}"
+      associated_elems
+	class_ref 130573 // DetailBulletinDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 129677 "DisciplineDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.Discipline;
+${definition}"
+      associated_elems
+	class_ref 130829 // DisciplineDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 129805 "EleveDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.Eleve;
+import model.local.TableRow;
+${definition}"
+      associated_elems
+	class_ref 131085 // EleveDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 129933 "EnseignementDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.Classe;
+import model.local.Discipline;
+import model.local.Enseignement;
+import model.local.Professeur;
+${definition}"
+      associated_elems
+	class_ref 131341 // EnseignementDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 130061 "EvaluationDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.DetailBulletin;
+import model.local.Evaluation;
+${definition}"
+      associated_elems
+	class_ref 131597 // EvaluationDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 130189 "InscriptionDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.Classe;
+import model.local.Eleve;
+import model.local.Inscription;
+${definition}"
+      associated_elems
+	class_ref 131853 // InscriptionDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 130317 "NiveauDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.Classe;
+import model.local.Niveau;
+${definition}"
+      associated_elems
+	class_ref 132109 // NiveauDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 130445 "ProfesseurDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.Professeur;
+import model.local.TableRow;
+${definition}"
+      associated_elems
+	class_ref 132365 // ProfesseurDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+
+    artifact 130573 "TrimestreDAO"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.local.AnneeScolaire;
+import model.local.Trimestre;
+${definition}"
+      associated_elems
+	class_ref 132621 // TrimestreDAO
+      end
+      comment "To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+"
+    end
+  end
+end

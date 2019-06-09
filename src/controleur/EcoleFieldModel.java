@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Map;
 import model.local.TableRow;
 
-/**
- *
- * @author Jerome
- */
+
 public class EcoleFieldModel {
   
   private List<String> fieldNames;

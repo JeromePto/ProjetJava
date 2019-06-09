@@ -1,0 +1,75 @@
+class Bulletin
+!!!142861.java!!!	Bulletin(in id : int, in appreciation : String, inout trimestre : Trimestre, inout inscription : Inscription)
+    super(id);
+    this.appreciation = appreciation;
+    this.trimestre = trimestre;
+    this.inscription = inscription;
+    this.average = -1f;
+!!!142989.java!!!	toString() : String
+    return "Bulletin{" + "id=" + id + ", appreciation=" + appreciation + ", trimestre=" + trimestre + ", insription=" + inscription + '}';
+!!!143117.java!!!	computeAverage(inout connect : Connection) : void
+    try {
+      ResultSet result = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT if(COUNT(NOTE)=0, -1.0, AVG(NOTE)) AS AVERAGE "
+                  + "FROM bulletin "
+                  + "INNER JOIN detailbulletin ON detailbulletin.BULLETIN_ID = bulletin.ID "
+                  + "INNER JOIN evaluation ON evaluation.DETAILBULLETIN_ID = detailbulletin.ID "
+                  + "WHERE bulletin.ID = " + id);
+      if (result.first()) {
+        average = result.getFloat("AVERAGE");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+!!!143245.java!!!	getAverage() : float
+    if (average == -1) {
+      computeAverage(EcoleConnection.getInstance());
+    }
+    return average;
+!!!143373.java!!!	getStringAverage() : String
+    if (average == -1) {
+      computeAverage(EcoleConnection.getInstance());
+    }
+    return average == -1 ? "No average" : String.valueOf(average);
+!!!143501.java!!!	getAppreciation() : String
+    return appreciation;
+!!!143629.java!!!	getTrimestre() : Trimestre
+    return trimestre;
+!!!143757.java!!!	getInscription() : Inscription
+    return inscription;
+!!!143885.java!!!	readId(inout printId : boolean) : String
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+!!!144013.java!!!	getInfo() : Set<String>
+    Set<String> out = new LinkedHashSet<>();
+    out.addAll(trimestre.getInfo());
+    out.addAll(inscription.getInfo());
+    return out;
+!!!144141.java!!!	getStringRow() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(appreciation);
+    out.add(trimestre.readId(true));
+    out.add(inscription.readId(true));
+    out.add(getStringAverage());
+    return out;
+!!!144269.java!!!	getColumnName() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Apperciation");
+    out.add("Trimestre");
+    out.add("Inscription");
+    out.add("Moyenne");
+    return out;
+!!!144397.java!!!	getStringRowField() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(appreciation);
+    out.add(String.valueOf(trimestre.getId()));
+    out.add(String.valueOf(inscription.getId()));
+    out.add(getStringAverage());
+    return out;

@@ -1,0 +1,33 @@
+class Niveau
+!!!153741.java!!!	Niveau(in id : int, in nom : String)
+    super(id);
+    this.nom = nom;
+!!!153869.java!!!	getNom() : String
+    return nom;
+!!!153997.java!!!	readId(inout printId : boolean) : String
+    String tmp = "";
+    for(String it : getInfo()) {
+      tmp += it + " ";
+    }
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+!!!154125.java!!!	getInfo() : Set<String>
+    Set<String> out = new LinkedHashSet<>();
+    out.add(nom);
+    return out;
+!!!154253.java!!!	toString() : String
+    return "Niveau{" + "id=" + id + ", nom=" + nom + '}';
+!!!154381.java!!!	getStringRow() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    return out;
+!!!154509.java!!!	getColumnName() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Nom");
+    return out;
+!!!154637.java!!!	getStringRowField() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(nom);
+    return out;

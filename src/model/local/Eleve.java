@@ -2,7 +2,7 @@ package model.local;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class Eleve extends Personne {
 

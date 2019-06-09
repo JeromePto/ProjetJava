@@ -1,0 +1,74 @@
+class Trimestre
+!!!155021.java!!!	Trimestre(in id : int, inout anneeScolaire : AnneeScolaire, in numero : int, inout debut : Calendar, inout fin : Calendar)
+    super(id);
+    this.anneeScolaire = anneeScolaire;
+    this.numero = numero;
+    this.debut = debut;
+    this.fin = fin;
+!!!155149.java!!!	Trimestre(in id : int, inout anneeScolaire : AnneeScolaire, in numero : int, inout debut : Date, inout fin : Date)
+    super(id);
+    this.anneeScolaire = anneeScolaire;
+    this.numero = numero;
+    this.debut = Calendar.getInstance();
+    this.debut.setTime(debut);
+    this.fin = Calendar.getInstance();
+    this.fin.setTime(fin);
+!!!155277.java!!!	Trimestre(in id : int, inout anneeScolaire : AnneeScolaire, in numero : int, in debut : String, in fin : String)
+    super(id);
+    this.anneeScolaire = anneeScolaire;
+    this.numero = numero;
+    DateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+    date.parse(debut);
+    this.debut = Calendar.getInstance();
+    this.debut.setTime(date.getCalendar().getTime());
+    date.parse(fin);
+    this.fin = Calendar.getInstance();
+    this.fin.setTime(date.getCalendar().getTime());
+!!!155405.java!!!	getAnneeScolaire() : AnneeScolaire
+    return anneeScolaire;
+!!!155533.java!!!	getNumero() : int
+    return numero;
+!!!155661.java!!!	getDebut() : Calendar
+    return debut;
+!!!155789.java!!!	getFin() : Calendar
+    return fin;
+!!!155917.java!!!	readId(inout printId : boolean) : String
+    String tmp = "";
+    for (String it : getInfo()) {
+      tmp += it + " ";
+    }
+    return printId ? String.valueOf(id) + " : " + tmp : tmp;
+!!!156045.java!!!	getInfo() : Set<String>
+    Set<String> out = new LinkedHashSet<>();
+    out.add("T" + numero);
+    out.addAll(anneeScolaire.getInfo());
+    return out;
+!!!156173.java!!!	simpleDate(inout tmp : Calendar) : String
+    DateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+    return date.format(tmp.getTime());
+!!!156301.java!!!	toString() : String
+    return "Trimestre{" + "id=" + id + ", anneeScolaire=" + anneeScolaire + ", numero=" + numero + ", debut=" + simpleDate(debut) + ", fin=" + simpleDate(fin) + '}';
+!!!156429.java!!!	getStringRow() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(anneeScolaire.readId(true));
+    out.add(String.valueOf(numero));
+    out.add(simpleDate(debut));
+    out.add(simpleDate(fin));
+    return out;
+!!!156557.java!!!	getColumnName() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add("ID");
+    out.add("Année scolaire");
+    out.add("Numero");
+    out.add("Debut");
+    out.add("Fin");
+    return out;
+!!!156685.java!!!	getStringRowField() : List<String>
+    List<String> out = new ArrayList<>();
+    out.add(String.valueOf(id));
+    out.add(String.valueOf(anneeScolaire.getId()));
+    out.add(String.valueOf(numero));
+    out.add(simpleDate(debut));
+    out.add(simpleDate(fin));
+    return out;

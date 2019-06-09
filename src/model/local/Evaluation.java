@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * 
- * @author Jerome
+ * 
  */
 public class Evaluation extends TableRow{
 

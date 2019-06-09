@@ -11,7 +11,7 @@ import vue.MainTable;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public interface ManagementInterface {
   public MainTable getTable();

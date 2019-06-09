@@ -16,7 +16,7 @@ import model.local.AnneeScolaire;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class AnneeScolaireDAO extends DAO<AnneeScolaire> {
 

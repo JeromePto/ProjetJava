@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public abstract class TableRow {
   

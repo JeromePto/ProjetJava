@@ -18,7 +18,7 @@ import model.local.Niveau;
 
 /**
  *
- * @author Jerome
+ * 
  */
 public class ClasseDAO extends DAO<Classe> {
 

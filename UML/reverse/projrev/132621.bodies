@@ -1,0 +1,45 @@
+class TrimestreDAO
+!!!140813.java!!!	TrimestreDAO(inout connect : Connection, in table : String)
+    super(connect, table);
+!!!140941.java!!!	create(inout obj : Trimestre) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "INSERT INTO trimestre (NUMERO, DEBUT, FIN, ANNEESCOLAIRE_ID) VALUES(?,?,?,?)");
+    statement.setObject(1, obj.getNumero(), Types.INTEGER);
+    statement.setObject(2, new java.sql.Date(obj.getDebut().getTime().getTime()), Types.DATE);
+    statement.setObject(3, new java.sql.Date(obj.getFin().getTime().getTime()), Types.DATE);
+    statement.setObject(4, obj.getAnneeScolaire().getId(), Types.INTEGER);
+    statement.executeUpdate();
+    return true;
+!!!141069.java!!!	update(inout obj : Trimestre) : boolean
+    PreparedStatement statement = this.connect.prepareStatement(
+        "UPDATE trimestre "
+        + "SET NUMERO = ?, DEBUT = ?, FIN = ?, ANNEESCOLAIRE_ID = ? "
+        + "WHERE ID = ?");
+    statement.setInt(1, obj.getNumero());
+    statement.setDate(2, new java.sql.Date(obj.getDebut().getTime().getTime()));
+    statement.setDate(3, new java.sql.Date(obj.getFin().getTime().getTime()));
+    statement.setInt(4, obj.getAnneeScolaire().getId());
+    statement.setInt(5, obj.getId());
+    statement.executeUpdate();
+    return true;
+!!!141197.java!!!	find(in id : int) : Trimestre
+    Trimestre tri = null;
+    try {
+      ResultSet result = this.connect.createStatement(
+          ResultSet.TYPE_SCROLL_INSENSITIVE,
+          ResultSet.CONCUR_READ_ONLY).executeQuery(
+              "SELECT * FROM trimestre WHERE ID = " + id);
+      if (result.first()) {
+        DAO<AnneeScolaire> anneeScolaire = DAOFactory.getAnneeScolaireDAO();
+        tri = new Trimestre(result.getInt("ID"),
+            anneeScolaire.find(result.getInt("ANNEESCOLAIRE_ID")),
+            result.getInt("NUMERO"),
+            result.getDate("DEBUT"),
+            result.getDate("FIN"));
+      } else {
+        throw new IllegalArgumentException("Missing element in Database");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.SEVERE, null, ex);
+    }
+    return tri;
